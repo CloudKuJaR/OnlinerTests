@@ -22,5 +22,11 @@ namespace Onliner
             loginForm.loginButton.Click();
             
         }
+
+        public static void FillSerachBar()
+        {
+            HomePage homePage = new HomePage();
+            homePage.searchBar.SendKeys(Config.SearchInformation.searchItem);
+        }
     }
 }

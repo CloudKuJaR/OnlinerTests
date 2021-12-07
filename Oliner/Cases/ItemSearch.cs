@@ -8,21 +8,20 @@ using System.Threading.Tasks;
 
 namespace Onliner.Cases
 {
-    class Login
+    class ItemSearch
     {
 
         [OneTimeSetUp]
         public void Initialize()
         {
             Actions.InitializeDriver();
-            NavigateTo.LoginFormScenario();
         }
 
         [Test]
-        public void LogIn()
+        public void SeacrhItem()
         {
             Thread.Sleep(2000);
-            Actions.FillLoginForm();
+            Actions.FillSerachBar();
             Thread.Sleep(3000);
         }
 
@@ -32,4 +31,8 @@ namespace Onliner.Cases
             Driver.driver.Quit();
         }
     }
+
+
+
 }
+

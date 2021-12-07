@@ -15,5 +15,10 @@ namespace Onliner
             public static string userMail = "taram99815@patmui.com";
             public static string userPassword = "casm9hir8LOT@klap";
         }
+
+        public static class SearchInformation
+        {
+            public static string searchItem = "Thinkpad T14";
+        }
     }
 }

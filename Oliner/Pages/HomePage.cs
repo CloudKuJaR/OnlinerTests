@@ -12,6 +12,8 @@ namespace Onliner.Pages
 
         [FindsBy(How = How.XPath, Using = "//div[@class='auth-bar__item auth-bar__item--text']")]
         public IWebElement authButton { get; set; }
+        [FindsBy(How = How.XPath, Using = "//input[@tabindex='1']")]
+        public IWebElement searchBar { get; set; }
 
 
     }

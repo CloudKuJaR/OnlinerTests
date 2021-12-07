@@ -8,9 +8,9 @@ namespace Onliner
         public static void LoginFormScenario()
         {
             HomePage homePage = new HomePage();
-            //Thread.Sleep(800);
+            Thread.Sleep(800);
             homePage.authButton.Click();
-            //Thread.Sleep(2000);
+            Thread.Sleep(2000);
         }
     }
 }
