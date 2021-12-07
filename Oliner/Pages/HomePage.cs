@@ -14,6 +14,8 @@ namespace Onliner.Pages
         public IWebElement authButton { get; set; }
         [FindsBy(How = How.XPath, Using = "//input[@tabindex='1']")]
         public IWebElement searchBar { get; set; }
+        [FindsBy(How = How.XPath, Using = "//span[@class='b-main-navigation__text'][text()='Каталог']")]
+        public IWebElement catalogButton { get; set; }
 
 
     }

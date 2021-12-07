@@ -8,31 +8,26 @@ using System.Threading.Tasks;
 
 namespace Onliner.Cases
 {
-    class ItemSearch
+    class NavigateToCatalog
     {
-
-        [SetUp]
+        [OneTimeSetUp]
         public void Initialize()
         {
             Actions.InitializeDriver();
         }
 
         [Test]
-        public void SeacrhItem()
+        public void NavigaToCatalog()
         {
             Thread.Sleep(2000);
-            Actions.FillSerachBar();
+            Actions.ClickCatalogButton();
             Thread.Sleep(3000);
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void CleanUp()
         {
             Driver.driver.Quit();
         }
     }
-
-
-
 }
-

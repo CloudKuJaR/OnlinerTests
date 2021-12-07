@@ -9,6 +9,7 @@ namespace Onliner
 {
     public static class Actions
     {
+        public static HomePage homePage = new HomePage();
         public static void InitializeDriver()
         {
             Driver.driver.Navigate().GoToUrl(Config.baseUrl);
@@ -25,8 +26,13 @@ namespace Onliner
 
         public static void FillSerachBar()
         {
-            HomePage homePage = new HomePage();
+            
             homePage.searchBar.SendKeys(Config.SearchInformation.searchItem);
+        }
+
+        public static void ClickCatalogButton()
+        {
+            homePage.catalogButton.Click();
         }
     }
 }
