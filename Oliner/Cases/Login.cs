@@ -14,13 +14,13 @@ namespace Onliner.Cases
         [OneTimeSetUp]
         public void Initialize()
         {
-            Actions.InitializeDriver();
-            NavigateTo.LoginFormScenario();
+            Actions.InitializeDriver(); 
         }
 
         [Test]
         public void LogIn()
         {
+            NavigateTo.LoginForm();
             Thread.Sleep(2000);
             Actions.FillLoginForm();
             Thread.Sleep(3000);

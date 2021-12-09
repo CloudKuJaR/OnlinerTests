@@ -1,4 +1,5 @@
 ﻿using Onliner.Pages;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Onliner
         public static HomePage homePage = new HomePage();
         public static void InitializeDriver()
         {
+            Driver.driver = new ChromeDriver();
             Driver.driver.Navigate().GoToUrl(Config.baseUrl);
         }
 
@@ -34,5 +36,6 @@ namespace Onliner
         {
             homePage.catalogButton.Click();
         }
+
     }
 }

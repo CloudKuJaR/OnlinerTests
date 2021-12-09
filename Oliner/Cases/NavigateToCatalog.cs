@@ -17,10 +17,10 @@ namespace Onliner.Cases
         }
 
         [Test]
-        public void NavigaToCatalog()
+        public void NavigateToCatalogTest()
         {
             Thread.Sleep(2000);
-            Actions.ClickCatalogButton();
+            NavigateTo.Catalog();
             Thread.Sleep(3000);
         }
 

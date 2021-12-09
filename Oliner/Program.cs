@@ -7,26 +7,23 @@
 //    {
 //        static void Main()
 //        {
-//            //HomePage homePage = new HomePage();
-//            //LoginForm loginForm = new LoginForm();
+//            HomePage homePage = new HomePage();
+//            LoginForm loginForm = new LoginForm();
+//            Catalog catalog = new Catalog();
 
-//            //Driver.driver.Navigate().GoToUrl(Config.baseUrl);
+//            Driver.driver.Navigate().GoToUrl(Config.baseUrl);
 
-//            //Thread.Sleep(3000);
+//            Thread.Sleep(900);
 
-//            //homePage.authButton.Click();
+//            catalog.tv.Click();
 
-//            //Thread.Sleep(3000);
-
-//            //loginForm.UsernameField.SendKeys(Config.Credentials.userMail);
-//            //Thread.Sleep(3000);
-//            //loginForm.PasswordField.SendKeys(Config.Credentials.userPassword);
-//            //Thread.Sleep(3000);
-//            //loginForm.loginButton.Click();
-//            //Thread.Sleep(3000);
+//            Thread.Sleep(900);
 
 
-//            //Driver.driver.Quit();
+
+
+
+//            Driver.driver.Quit();
 //        }
 
 //    }

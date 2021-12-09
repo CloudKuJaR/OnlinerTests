@@ -11,7 +11,7 @@ namespace Onliner.Cases
     class ItemSearch
     {
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Initialize()
         {
             Actions.InitializeDriver();
@@ -25,7 +25,7 @@ namespace Onliner.Cases
             Thread.Sleep(3000);
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void CleanUp()
         {
             Driver.driver.Quit();
