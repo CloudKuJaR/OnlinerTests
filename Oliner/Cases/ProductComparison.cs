@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
 using Onliner.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Onliner.Cases
 {
@@ -25,22 +20,19 @@ namespace Onliner.Cases
             TVPage tvPage = new TVPage();
             ProductPage productPage = new ProductPage();
             Menu menu = new Menu();
-
             NavigateTo.Catalog();
-            catalogPage.electronics.Click();
-            catalogPage.tvAndVideo.Click();
-            catalogPage.tv.Click();
+            NavigateTo.TvPage();
             Thread.Sleep(1000);
-            tvPage.product1.Click();
-            productPage.comparisonButton.Click();
+            Actions.ClickFirstProductButton();
+            Actions.ClickComparisonButton();
             Thread.Sleep(1000);
-            productPage.tvCatalogButton.Click();
+            Actions.ClickTvCatalogButton();
             Thread.Sleep(500);
-            tvPage.product2.Click();
+            Actions.ClickSecondProductButton();
             Thread.Sleep(500);
-            productPage.comparisonButton.Click();
+            Actions.ClickComparisonButton();
             Thread.Sleep(1000);
-            menu.compareButton.Click();
+            Actions.ClickCompareButton();
             Thread.Sleep(2000);
         }
 

@@ -5,25 +5,21 @@ namespace Onliner
 {
     class NavigateTo
     {
+        public static CatalogPage catalogPage = new CatalogPage();
+        public static TVPage tvPage = new TVPage();
+        public static ProductPage  productPage = new ProductPage();
+        public static Menu menu = new Menu();
+
         public static void LoginForm()
         {
-            HomePage homePage = new HomePage();
+            
             Thread.Sleep(800);
-            homePage.authButton.Click();
+            menu.authButton.Click();
             Thread.Sleep(2000);
         }
 
-        public static void tvPage()
+        public static void TvPage()
         {
-            CatalogPage catalogPage = new CatalogPage();
-            TVPage tvPage = new TVPage();
-            ProductPage productPage = new ProductPage();
-            CartPage cartPage = new CartPage();
-            NavigateTo.LoginForm();
-            Actions.FillLoginForm();
-            Thread.Sleep(3000);
-            Actions.ClickCatalogButton();
-            
             catalogPage.electronics.Click();
             catalogPage.tvAndVideo.Click();
             catalogPage.tv.Click();

@@ -1,17 +1,12 @@
 ﻿using NUnit.Framework;
 using Onliner.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Onliner.Cases
 {
     class BuyProduct
     {
-
+        
 
         [OneTimeSetUp]
         public void Initialize()
@@ -22,21 +17,23 @@ namespace Onliner.Cases
         [Test]
         public void BuyProductTest()
         {
-            TVPage tvPage = new TVPage();
-            ProductPage productPage = new ProductPage();
-            CartPage cartPage = new CartPage();
-
-            NavigateTo.tvPage();
-            tvPage.product1.Click();
-            productPage.sellersOffers.Click();
+            NavigateTo.LoginForm();
+            Actions.FillLoginForm();
+            Thread.Sleep(3000);
+            Actions.ClickCatalogButton();
+            NavigateTo.TvPage();
+            Actions.ClickFirstProductButton();
+            Actions.ClickSellersOfeersButton();
             Thread.Sleep(1000);
-            productPage.prodovec.Click();
+            Actions.ClickSellerButton();
             Thread.Sleep(2000);
-            productPage.cart.Click();
+            Actions.ClickCratButton();
             Thread.Sleep(2000);
-            cartPage.orderButton.Click();
+            Actions.ClickOrderButton();
             Thread.Sleep(10000);
         }
+
+
 
         [OneTimeTearDown]
         public void CleanUp()

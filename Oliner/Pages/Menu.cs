@@ -1,10 +1,5 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Onliner.Pages
 {
@@ -17,6 +12,15 @@ namespace Onliner.Pages
 
         [FindsBy(How = How.XPath, Using = "//a[@class='compare-button__sub compare-button__sub_main']")]
         public IWebElement compareButton { get; set; }
-        
+
+        [FindsBy(How = How.XPath, Using = "//span[@class='b-main-navigation__text'][text()='Каталог']")]
+        public IWebElement catalogButton { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//input[@tabindex='1']")]
+        public IWebElement searchBar { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='auth-bar__item auth-bar__item--text']")]
+        public IWebElement authButton { get; set; }
+
     }
 }
