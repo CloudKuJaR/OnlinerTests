@@ -1,5 +1,5 @@
-﻿using Onliner.Pages;
-using System.Threading;
+﻿using Onliner.Actions;
+using Onliner.Pages;
 
 namespace Onliner
 {
@@ -7,15 +7,12 @@ namespace Onliner
     {
         public static CatalogPage catalogPage = new CatalogPage();
         public static TVPage tvPage = new TVPage();
-        public static ProductPage  productPage = new ProductPage();
+        public static ProductPage productPage = new ProductPage();
         public static Menu menu = new Menu();
 
         public static void LoginForm()
         {
-            
-            Thread.Sleep(800);
             menu.authButton.Click();
-            Thread.Sleep(2000);
         }
 
         public static void TvPage()
@@ -23,13 +20,12 @@ namespace Onliner
             catalogPage.electronics.Click();
             catalogPage.tvAndVideo.Click();
             catalogPage.tv.Click();
-            Thread.Sleep(1000);
 
         }
 
         public static void Catalog()
         {
-            Actions.ClickCatalogButton();
+            ActionsHomePage.ClickCatalogButton();
         }
     }
 }

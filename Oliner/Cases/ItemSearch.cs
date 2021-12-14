@@ -1,23 +1,20 @@
 ﻿using NUnit.Framework;
-using System.Threading;
+using Onliner.Actions;
 
 namespace Onliner.Cases
 {
     class ItemSearch
     {
-
         [OneTimeSetUp]
-        public void Initialize()
+        public void InitializeComponent()
         {
-            Actions.InitializeDriver();
+            Initialize.InitializeComponents();
         }
 
         [Test]
         public void SeacrhItem()
         {
-            Thread.Sleep(2000);
-            Actions.FillSerachBar();
-            Thread.Sleep(3000);
+            ActionsHomePage.FillSerachBar();
         }
 
         [OneTimeTearDown]

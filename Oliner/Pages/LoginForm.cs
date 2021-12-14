@@ -10,14 +10,17 @@ namespace Onliner.Pages
             PageFactory.InitElements(Driver.driver, this);
         }
 
-        [FindsBy(How = How.XPath, Using = "//input[@placeholder='Ник или e-mail']")]
+        [FindsBy(How = How.XPath, Using = USERNAME_FIELD)]
         public IWebElement UsernameField { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//input[@placeholder='Пароль']")]
+        [FindsBy(How = How.XPath, Using = PASSWORD_FIELD)]
         public IWebElement PasswordField { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='auth-form__control auth-form__control_condensed-additional']/button[@type='submit']")]
+        [FindsBy(How = How.XPath, Using = LOGIN_BUTTON)]
         public IWebElement loginButton { get; set; }
 
+        public const string USERNAME_FIELD = "//input[@placeholder='Ник или e-mail']";
+        public const string PASSWORD_FIELD = "//input[@placeholder='Пароль']";
+        public const string LOGIN_BUTTON = "//div[@class='auth-form__control auth-form__control_condensed-additional']/button[@type='submit']";
     }
 }

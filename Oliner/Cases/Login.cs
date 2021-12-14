@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using System.Threading;
+using Onliner.Actions;
 
 namespace Onliner.Cases
 {
@@ -7,18 +7,16 @@ namespace Onliner.Cases
     {
 
         [OneTimeSetUp]
-        public void Initialize()
+        public void InitializeComponent()
         {
-            Actions.InitializeDriver();
+            Initialize.InitializeComponents();
         }
 
         [Test]
         public void LogIn()
         {
             NavigateTo.LoginForm();
-            Thread.Sleep(2000);
-            Actions.FillLoginForm();
-            Thread.Sleep(3000);
+            ActionsLogin.FillLoginForm();
         }
 
         [OneTimeTearDown]

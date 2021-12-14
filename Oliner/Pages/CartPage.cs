@@ -10,7 +10,9 @@ namespace Onliner.Pages
             PageFactory.InitElements(Driver.driver, this);
         }
 
-        [FindsBy(How = How.XPath, Using = "//a[@class='button-style button-style_small cart-form__button button-style_primary']")]
+        [FindsBy(How = How.XPath, Using = ORDER_BUTTON)]
         public IWebElement orderButton { get; set; }
+
+        public const string ORDER_BUTTON = "//a[@class='button-style button-style_small cart-form__button button-style_primary']";
     }
 }

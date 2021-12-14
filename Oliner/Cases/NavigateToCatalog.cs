@@ -1,22 +1,19 @@
 ﻿using NUnit.Framework;
-using System.Threading;
 
 namespace Onliner.Cases
 {
     class NavigateToCatalog
     {
         [OneTimeSetUp]
-        public void Initialize()
+        public void InitializeComponent()
         {
-            Actions.InitializeDriver();
+            Initialize.InitializeComponents();
         }
 
         [Test]
         public void NavigateToCatalogTest()
         {
-            Thread.Sleep(2000);
             NavigateTo.Catalog();
-            Thread.Sleep(3000);
         }
 
         [OneTimeTearDown]

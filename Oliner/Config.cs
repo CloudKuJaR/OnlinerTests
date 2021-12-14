@@ -14,5 +14,11 @@
         {
             public static string searchItem = "Thinkpad T14";
         }
+
+        public static class Locators
+        {
+            public static string product1 = "//span[text()='Телевизор Samsung QE65QN90AAU']/..";
+            public static string product2 = "//span[text()='Телевизор LG 55NANO926PB']/..";
+        }
     }
 }

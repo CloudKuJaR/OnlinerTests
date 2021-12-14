@@ -1,39 +1,35 @@
 ﻿using NUnit.Framework;
+using Onliner.Actions;
 using Onliner.Pages;
-using System.Threading;
 
 namespace Onliner.Cases
 {
     class BuyProduct
     {
-        
-
         [OneTimeSetUp]
-        public void Initialize()
+        public void InitializeComponent()
         {
-            Actions.InitializeDriver();
+            Initialize.InitializeComponents();
         }
 
         [Test]
         public void BuyProductTest()
         {
             NavigateTo.LoginForm();
-            Actions.FillLoginForm();
-            Thread.Sleep(3000);
-            Actions.ClickCatalogButton();
+            ActionsLogin.FillLoginForm();
+            ActionsWait.WaitMethod(Menu.CATALOG_BUTTON);
+            ActionsHomePage.ClickCatalogButton();
             NavigateTo.TvPage();
-            Actions.ClickFirstProductButton();
-            Actions.ClickSellersOfeersButton();
-            Thread.Sleep(1000);
-            Actions.ClickSellerButton();
-            Thread.Sleep(2000);
-            Actions.ClickCratButton();
-            Thread.Sleep(2000);
-            Actions.ClickOrderButton();
-            Thread.Sleep(10000);
+            ActionsWait.WaitMethod(TVPage.PRODUCT1);
+            ActionsTvPage.ClickFirstProductButton();
+            ActionsProductPage.ClickSellersOfeersButton();
+            ActionsWait.WaitMethod(ProductPage.SELLER);
+            ActionsProductPage.ClickSellerButton();
+            ActionsWait.WaitMethod(ProductPage.CART);
+            ActionsProductPage.ClickCratButton();
+            ActionsWait.WaitMethod(CartPage.ORDER_BUTTON);
+            ActionsCartPage.ClickOrderButton();
         }
-
-
 
         [OneTimeTearDown]
         public void CleanUp()
