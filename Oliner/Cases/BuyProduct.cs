@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Onliner.Actions;
 using Onliner.Pages;
+using System.Threading;
 
 namespace Onliner.Cases
 {
@@ -25,6 +26,8 @@ namespace Onliner.Cases
             ActionsProductPage.ClickSellersOfeersButton();
             ActionsWait.WaitMethod(ProductPage.SELLER);
             ActionsProductPage.ClickSellerButton();
+            ActionsWait.WaitMethod(ProductPage.CONFIRM_CITY_BUTTON);
+            ActionsProductPage.ClickCityButton();
             ActionsWait.WaitMethod(ProductPage.CART);
             ActionsProductPage.ClickCratButton();
             ActionsWait.WaitMethod(CartPage.ORDER_BUTTON);

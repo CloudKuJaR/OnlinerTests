@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Onliner.Actions;
+using System.Threading;
 
 namespace Onliner.Cases
 {
@@ -15,6 +16,7 @@ namespace Onliner.Cases
         public void SeacrhItem()
         {
             ActionsHomePage.FillSerachBar();
+            Thread.Sleep(5000);
         }
 
         [OneTimeTearDown]

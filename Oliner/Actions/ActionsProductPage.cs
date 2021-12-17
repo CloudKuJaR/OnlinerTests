@@ -29,5 +29,10 @@ namespace Onliner.Actions
         {
             productPage.tvCatalogButton.Click();
         }
+
+        public static void ClickCityButton()
+        {
+            productPage.confirmCityButton.Click();
+        }
     }
 }
