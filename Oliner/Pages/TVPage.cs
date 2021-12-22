@@ -5,9 +5,9 @@ namespace Onliner.Pages
 {
     public class TVPage
     {
-        public TVPage()
+        public TVPage(IWebDriver driver)
         {
-            PageFactory.InitElements(Driver.driver, this);
+            PageFactory.InitElements(driver, this);
         }
 
         [FindsBy(How = How.XPath, Using = PRODUCT1)]
@@ -16,7 +16,7 @@ namespace Onliner.Pages
         [FindsBy(How = How.XPath, Using = PRODUCT2)]
         public IWebElement product2 { get; set; }
 
-        public const string PRODUCT1 = "//span[text()='Телевизор Samsung QE65QN85AAU']/..";
+        public const string PRODUCT1 = "//span[text()='Телевизор Samsung QE65Q80AAU']/..";
         public const string PRODUCT2 = "//span[text()='Телевизор LG 55NANO926PB']/..";
     }
 }

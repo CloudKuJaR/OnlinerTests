@@ -5,9 +5,9 @@ namespace Onliner.Pages
 {
     public class ProductPage
     {
-        public ProductPage()
+        public ProductPage(IWebDriver driver)
         {
-            PageFactory.InitElements(Driver.driver, this);
+            PageFactory.InitElements(driver, this);
         }
 
         [FindsBy(How = How.XPath, Using = SELLERS_OFFERS)]

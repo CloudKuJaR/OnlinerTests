@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Onliner.Actions;
 using Onliner.Pages;
+using OpenQA.Selenium;
 using System.Threading;
 
 namespace Onliner.Cases
@@ -9,34 +10,36 @@ namespace Onliner.Cases
     class BuyProduct
     {
         private string testName = "BuyProductTest";
+        public  IWebDriver driver { get; set; }
         [OneTimeSetUp]
         public void InitializeComponent()
         {
             string reportPath = Initialize.InitializePath();
             Initialize.InitializeReporter(reportPath, testName);
-            Initialize.InitializeComponents();
+            driver = Initialize.InitializeDriver();
+            Initialize.InitializeWait(driver);
         }
 
         [Test]
         public void BuyProductTest()
         {
             Reporter.test = Reporter.extent.CreateTest(testName).Info("Test Started");
-            NavigateTo.LoginForm();
-            ActionsLogin.FillLoginForm();
+            NavigateTo.LoginForm(driver);
+            ActionsLogin.FillLoginForm(driver);
             ActionsWait.WaitMethod(Menu.CATALOG_BUTTON);
-            ActionsHomePage.ClickCatalogButton();
-            NavigateTo.TvPage();
+            ActionsHomePage.ClickCatalogButton(driver);
+            NavigateTo.TvPage(driver);
             ActionsWait.WaitMethod(TVPage.PRODUCT1);
-            ActionsTvPage.ClickFirstProductButton();
-            ActionsProductPage.ClickSellersOfeersButton();
+            ActionsTvPage.ClickFirstProductButton(driver);
+            ActionsProductPage.ClickSellersOfeersButton(driver);
             ActionsWait.WaitMethod(ProductPage.SELLER);
-            ActionsProductPage.ClickSellerButton();
+            ActionsProductPage.ClickSellerButton(driver);
             ActionsWait.WaitMethod(ProductPage.CONFIRM_CITY_BUTTON);
-            ActionsProductPage.ClickCityButton();
+            ActionsProductPage.ClickCityButton(driver);
             ActionsWait.WaitMethod(ProductPage.CART);
-            ActionsProductPage.ClickCratButton();
+            ActionsProductPage.ClickCratButton(driver);
             ActionsWait.WaitMethod(CartPage.ORDER_BUTTON);
-            ActionsCartPage.ClickOrderButton();
+            ActionsCartPage.ClickOrderButton(driver);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -44,7 +47,7 @@ namespace Onliner.Cases
         public void CleanUp()
         {
             Reporter.extent.Flush();
-            Driver.driver.Quit();
+            driver.Quit();
         }
 
 

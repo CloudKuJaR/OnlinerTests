@@ -5,9 +5,9 @@ namespace Onliner.Pages
 {
     public class CartPage
     {
-        public CartPage()
+        public CartPage(IWebDriver driver)
         {
-            PageFactory.InitElements(Driver.driver, this);
+            PageFactory.InitElements(driver, this);
         }
 
         [FindsBy(How = How.XPath, Using = ORDER_BUTTON)]

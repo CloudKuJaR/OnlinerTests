@@ -6,9 +6,9 @@ namespace Onliner.Pages
     public class CatalogPage
     {
 
-        public CatalogPage()
+        public CatalogPage(IWebDriver driver)
         {
-            PageFactory.InitElements(Driver.driver, this);
+            PageFactory.InitElements(driver, this);
         }
 
         [FindsBy(How = How.XPath, Using = TV)]

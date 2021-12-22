@@ -1,17 +1,20 @@
 ﻿using AventStack.ExtentReports;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Onliner.Cases
 {
     class NavigateToCatalog
     {
+        public IWebDriver driver { get; set; }
         private string testName = "NavigateToCatalogTest";
         [OneTimeSetUp]
         public void InitializeComponent()
         {
             string reportPath = Initialize.InitializePath();
             Initialize.InitializeReporter(reportPath,testName);
-            Initialize.InitializeComponents();
+            driver = Initialize.InitializeDriver();
+            Initialize.InitializeWait(driver);
             
         }
 
@@ -19,7 +22,7 @@ namespace Onliner.Cases
         public void NavigateToCatalogTest()
         {
             Reporter.test = Reporter.extent.CreateTest(testName).Info("Test Started");
-            NavigateTo.Catalog();
+            NavigateTo.Catalog(driver);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -27,7 +30,7 @@ namespace Onliner.Cases
         public void CleanUp()
         {
             Reporter.extent.Flush();
-            Driver.driver.Quit();
+            driver.Quit();
         }
     }
 }

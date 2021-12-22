@@ -4,12 +4,14 @@ using AventStack.ExtentReports.Reporter.Configuration;
 using NUnit.Framework;
 using Onliner.Actions;
 using Onliner.Pages;
+using OpenQA.Selenium;
 using System;
 
 namespace Onliner.Cases
 {
     class ProductComparison
     {
+        public IWebDriver driver { get; set; }
         private string testName = "ProductComparisonTest";
         [OneTimeSetUp]
         public void InitializeComponent()
@@ -27,7 +29,8 @@ namespace Onliner.Cases
         [SetUp]
         public void SetUp()
         {
-            Initialize.InitializeComponents();
+            driver = Initialize.InitializeDriver();
+            Initialize.InitializeWait(driver);
         }
 
 
@@ -35,16 +38,16 @@ namespace Onliner.Cases
         public void ProductComparisonTest()
         {
             Reporter.test = Reporter.extent.CreateTest(testName).Info("test started");
-            NavigateTo.Catalog();
-            NavigateTo.TvPage();
+            NavigateTo.Catalog(driver);
+            NavigateTo.TvPage(driver);
             ActionsWait.WaitMethod(TVPage.PRODUCT1);
-            ActionsTvPage.ClickFirstProductButton();
-            ActionsProductPage.ClickComparisonButton();
-            ActionsProductPage.ClickTvCatalogButton();
+            ActionsTvPage.ClickFirstProductButton(driver);
+            ActionsProductPage.ClickComparisonButton(driver);
+            ActionsProductPage.ClickTvCatalogButton(driver);
             ActionsWait.WaitMethod(TVPage.PRODUCT2);
-            ActionsTvPage.ClickSecondProductButton();
-            ActionsProductPage.ClickComparisonButton();
-            ActionsHomePage.ClickCompareButton();
+            ActionsTvPage.ClickSecondProductButton(driver);
+            ActionsProductPage.ClickComparisonButton(driver);
+            ActionsHomePage.ClickCompareButton(driver);
             Reporter.test.Log(Status.Pass, "test passed");
 
         }
@@ -52,7 +55,7 @@ namespace Onliner.Cases
         [TearDown]
         public void TearDown()
         {
-            Driver.driver.Quit();
+            driver.Quit();
         }
     }
 }

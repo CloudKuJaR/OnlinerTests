@@ -3,16 +3,22 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using OpenQA.Selenium;
 
 namespace Onliner
 {
     public static class Initialize
     {
-        public static void InitializeComponents()
+        public static IWebDriver InitializeDriver()
         {
-            Driver.driver = new ChromeDriver();
-            Driver.driver.Navigate().GoToUrl(Config.baseUrl);
-            Driver.wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
+            IWebDriver driver = new ChromeDriver();
+            driver.Url = Config.baseUrl;
+            return driver;
+        }
+
+        public static void InitializeWait(IWebDriver driver)
+        {
+            Driver.wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         public static string InitializePath()
