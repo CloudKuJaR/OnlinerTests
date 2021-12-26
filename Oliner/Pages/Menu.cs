@@ -5,9 +5,9 @@ namespace Onliner.Pages
 {
     public class Menu
     {
-        public Menu(IWebDriver driver)
+        public Menu()
         {
-            PageFactory.InitElements(driver, this);
+            PageFactory.InitElements(Driver.driver, this);
         }
 
         [FindsBy(How = How.XPath, Using = COMPARE_BUTTON)]

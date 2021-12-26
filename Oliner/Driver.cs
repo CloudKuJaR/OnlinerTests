@@ -5,6 +5,7 @@ namespace Onliner
 {
     public static class Driver
     {
+        public static IWebDriver driver { get; set; }
         public static WebDriverWait wait;
     }
 }
