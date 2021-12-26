@@ -7,5 +7,13 @@
         {
             waits.WaitMethod(locator);
         }
+
+        public static void WaitForProduct(string productName)
+        {
+            waits.WaitForProduct(productName);
+        }
+
+
+
     }
 }

@@ -17,7 +17,7 @@
 
         public static class Locators
         {
-            public static string product1 = "//span[text()='Телевизор Samsung QE65QN90AAU']/..";
+            public static string product1 = "//span[text()='Телевизор Samsung QE50LS01TAU']/..";
             public static string product2 = "//span[text()='Телевизор LG 55NANO926PB']/..";
         }
     }

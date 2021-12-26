@@ -13,7 +13,7 @@ namespace Onliner.Cases
         {
             string reportPath = Initialize.InitializePath();
             Initialize.InitializeReporter(reportPath,testName);
-            Initialize.InitializeComponents();
+            Initialize.InitializeDriver();
         }
 
         [Test]

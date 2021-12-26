@@ -10,5 +10,9 @@ namespace Onliner
         {
             element = Driver.wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(locator)));
         }
+        public void WaitForProduct(string productName)
+        {
+            element = Driver.wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span[text()='"+productName+"']/..")));
+        }
     }
 }

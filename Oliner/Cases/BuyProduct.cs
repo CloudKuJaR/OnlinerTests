@@ -14,7 +14,8 @@ namespace Onliner.Cases
         {
             string reportPath = Initialize.InitializePath();
             Initialize.InitializeReporter(reportPath, testName);
-            Initialize.InitializeComponents();
+            Initialize.InitializeDriver();
+            Initialize.InitializeWaitDriver();
         }
 
         [Test]
@@ -26,7 +27,7 @@ namespace Onliner.Cases
             ActionsWait.WaitMethod(Menu.CATALOG_BUTTON);
             ActionsHomePage.ClickCatalogButton();
             NavigateTo.TvPage();
-            ActionsWait.WaitMethod(TVPage.PRODUCT1);
+            ActionsWait.WaitForProduct("Телевизор Samsung QE50LS01TAU");
             ActionsTvPage.ClickFirstProductButton();
             ActionsProductPage.ClickSellersOfeersButton();
             ActionsWait.WaitMethod(ProductPage.SELLER);

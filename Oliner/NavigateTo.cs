@@ -12,11 +12,13 @@ namespace Onliner
 
         public static void LoginForm()
         {
+            Menu menu = new Menu();
             menu.authButton.Click();
         }
 
         public static void TvPage()
         {
+            catalogPage = new CatalogPage();
             catalogPage.electronics.Click();
             catalogPage.tvAndVideo.Click();
             catalogPage.tv.Click();

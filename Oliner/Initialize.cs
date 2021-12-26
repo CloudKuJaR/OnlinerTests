@@ -8,10 +8,16 @@ namespace Onliner
 {
     public static class Initialize
     {
-        public static void InitializeComponents()
+        public static void InitializeDriver()
         {
             Driver.driver = new ChromeDriver();
+            Driver.driver.Manage().Window.Maximize();
             Driver.driver.Navigate().GoToUrl(Config.baseUrl);
+            
+        }
+
+        public static void InitializeWaitDriver()
+        {
             Driver.wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
         }
 

@@ -27,7 +27,8 @@ namespace Onliner.Cases
         [SetUp]
         public void SetUp()
         {
-            Initialize.InitializeComponents();
+            Initialize.InitializeDriver();
+            Initialize.InitializeWaitDriver();
         }
 
 
@@ -37,11 +38,11 @@ namespace Onliner.Cases
             Reporter.test = Reporter.extent.CreateTest(testName).Info("test started");
             NavigateTo.Catalog();
             NavigateTo.TvPage();
-            ActionsWait.WaitMethod(TVPage.PRODUCT1);
+            ActionsWait.WaitForProduct("Телевизор Samsung QE50LS01TAU");
             ActionsTvPage.ClickFirstProductButton();
             ActionsProductPage.ClickComparisonButton();
             ActionsProductPage.ClickTvCatalogButton();
-            ActionsWait.WaitMethod(TVPage.PRODUCT2);
+            ActionsWait.WaitForProduct("Телевизор LG 55NANO926PB");
             ActionsTvPage.ClickSecondProductButton();
             ActionsProductPage.ClickComparisonButton();
             ActionsHomePage.ClickCompareButton();

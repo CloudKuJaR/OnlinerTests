@@ -29,7 +29,7 @@ namespace Onliner.Pages
         public IWebElement confirmCityButton { get; set; }
 
         public const string SELLERS_OFFERS = "//span[text()='Предложения продавцов']/..";
-        public const string SELLER = "//div[text()='Гарантия 24 месяца. Мы предоставляем 14 дней на проверку товара. В продаже кронштейны c возможностью монтажа на стену. При необходимости установка и настройка в присутствии клиента. Собственная курьерская служба.']/../../../../div[2]/div/a[2]";
+        public const string SELLER = "//div[text()='Гарантия 12 месяцев. Код товара 6.488.214.  Без выходных. Собственная курьерская служба. Цена без рассрочки. Более 800 000 товаров. Мы работаем для Вас с 2004 года!']/../../../../div[2]/div/a[2]";
         public const string CART = "//div[@class='product-recommended__control product-recommended__control_checkout']/a[2]";
         public const string COMPARISON_BUTTON = "//span[@class='catalog-masthead-controls__input i-checkbox i-checkbox_yellow']";
         public const string TV_CATALOG_BUTTON = "//span[text()='Телевизоры']";
