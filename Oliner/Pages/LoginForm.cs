@@ -5,9 +5,9 @@ namespace Onliner.Pages
 {
     public class LoginForm
     {
-        public LoginForm()
+        public LoginForm(IWebDriver driver)
         {
-            PageFactory.InitElements(Driver.driver, this);
+            PageFactory.InitElements(driver, this);
         }
 
         [FindsBy(How = How.XPath, Using = USERNAME_FIELD)]
