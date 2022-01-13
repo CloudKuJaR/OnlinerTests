@@ -1,7 +1,5 @@
-﻿using Onliner.ActionsWaits;
-using Onliner.WebElementExtension;
+﻿using Onliner.WebElementExtension;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
 
 namespace Onliner.Pages
 {
@@ -14,8 +12,10 @@ namespace Onliner.Pages
         public const string SEARCH_WINDOW = "//div[@class='search__content-wrapper']";
         public const string USER_MENU = "//a[@href='https://profile.onliner.by']//div[contains(@class,'b-top-profile__image')]";
         public const string LOGOUT_BUTTON = "//div[contains(@class,'b-top-profile__logout')]/a";
-        public const string CART_BANNER = "//*[contains(@class,'auth-bar__counter') or contains(@class,'profile__counter')]";
+        public const string CART_BANNER = "//*[@id='cart-desktop']//span[not(contains(@style,'none'))]"; //*[contains(@class,'auth-bar__counter') or contains(@class,'profile__counter')]
         public const string CART_BUTTON = "//div[@id='cart-desktop']";
+        public const string ACC_NAME = "//*[@class='b-top-profile__name']//*[contains(@href,'https://profile.onliner.by')]";
+        public const string COMPARE_TEXT = "//*[@class='compare-button__sub compare-button__sub_main']//span";
 
         public MyWebElement CompareButton => new MyWebElement(By.XPath(COMPARE_BUTTON));
         public MyWebElement CatalogButton => new MyWebElement(By.XPath(CATALOG_BUTTON));
@@ -25,6 +25,8 @@ namespace Onliner.Pages
         public MyWebElement LogOutButton => new MyWebElement(By.XPath(LOGOUT_BUTTON));
         public MyWebElement CartBanner => new MyWebElement(By.XPath(CART_BANNER));
         public MyWebElement CartButton => new MyWebElement(By.XPath(CART_BUTTON));
+        public MyWebElement AccName => new MyWebElement(By.XPath(ACC_NAME));
+        public MyWebElement CompareText => new MyWebElement(By.XPath(COMPARE_TEXT));
 
         public void FillSerachBar()
         {
@@ -33,6 +35,7 @@ namespace Onliner.Pages
 
         public void OpenCatalogButton()
         {
+            CatalogButton.WaitForElementIsDisplayed();
             CatalogButton.Click();
         }
 
@@ -61,33 +64,20 @@ namespace Onliner.Pages
             CartButton.Click();
         }
 
-        public bool IsLoggedIn()
+        public bool IsSearchItemContains(string searchItem)
         {
-            bool isLogged = false;
-            try
+            bool isContains = true;
+            var ListOfSeacrhResults = Driver.driver.FindElements(By.XPath("//a[@class='product__title-link']"));
+            foreach (var item in ListOfSeacrhResults)
             {
-                if (UserMenu.Enabled == true)
+                if(!item.Text.Contains(searchItem))
                 {
-                    isLogged = true;
+                    isContains = false;
+                    break;
                 }
             }
-            catch { }
 
-            return isLogged;
-        }
-
-        public bool IsCartContains()
-        {
-            bool IsContains = false;
-            try
-            {
-                if (CartBanner.Enabled == true)
-                {
-                    IsContains = true;
-                }
-            }
-            catch { }
-            return IsContains;
+            return isContains;
         }
     }
 }

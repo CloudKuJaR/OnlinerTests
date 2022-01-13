@@ -13,7 +13,7 @@ namespace Onliner.Pages
 
         public static CartPage Cart
         {
-            get { return GetPage<CartPage>();}
+            get { return GetPage<CartPage>(); }
         }
 
         public static CatalogPage Catalog
@@ -44,6 +44,11 @@ namespace Onliner.Pages
         public static OrderPage OrderPage
         {
             get { return GetPage<OrderPage>(); }
+        }
+
+        public static ComparePage ComparePage
+        {
+            get { return GetPage<ComparePage>(); }
         }
     }
 }

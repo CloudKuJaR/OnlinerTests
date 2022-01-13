@@ -1,8 +1,5 @@
-﻿using Onliner.ActionsWaits;
+﻿using Onliner.WebElementExtension;
 using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using  OpenQA.Selenium.Interactions;
-using Onliner.WebElementExtension;
 
 namespace Onliner.Pages
 {
@@ -41,7 +38,7 @@ namespace Onliner.Pages
 
         public void ClickComparisonButton()
         {
-           ComparisonButton.Click();
+            ComparisonButton.Click();
         }
 
         public void ClickTvCatalogButton()

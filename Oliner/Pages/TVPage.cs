@@ -1,5 +1,4 @@
-﻿using Onliner.ActionsWaits;
-using Onliner.WebElementExtension;
+﻿using Onliner.WebElementExtension;
 using OpenQA.Selenium;
 
 namespace Onliner.Pages
@@ -14,13 +13,11 @@ namespace Onliner.Pages
 
         public void ClickFirstProductButton()
         {
-            //ActionsWait.WaitForProduct("Телевизор KIVI 65U710KB");
             Product1.Click();
         }
 
         public void ClickSecondProductButton()
         {
-            //ActionsWait.WaitForProduct("Телевизор LG 55NANO926PB");
             Product2.Click();
         }
     }

@@ -18,6 +18,7 @@ namespace Onliner.Pages
             UsernameField.SendKeys(TestSettings.UserName);
             PasswordField.SendKeys(TestSettings.Password);
             LoginButton.Click();
+
         }
     }
 }

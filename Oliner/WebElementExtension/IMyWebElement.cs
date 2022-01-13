@@ -2,7 +2,7 @@
 
 namespace Onliner.WebElementExtension
 {
-    interface IMyWebElement : IWebElement, ILocatable, IWrapsElement 
+    interface IMyWebElement : IWebElement, ILocatable, IWrapsElement
     {
         By Selector { get; }
     }

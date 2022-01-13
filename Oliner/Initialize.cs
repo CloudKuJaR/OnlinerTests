@@ -1,8 +1,8 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using AventStack.ExtentReports;
-using AventStack.ExtentReports.Reporter;
 
 namespace Onliner
 {
@@ -12,12 +12,11 @@ namespace Onliner
         {
             Driver.driver = new ChromeDriver();
             Driver.driver.Manage().Window.Maximize();
-            Driver.driver.Navigate().GoToUrl(Config.baseUrl);   
         }
 
-        public static void InitializeWaitDriver()
+        public static void GoToBaseUrl()
         {
-            Driver.wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
+            Driver.driver.Navigate().GoToUrl(TestSettings.BaseUrl);
         }
 
         public static string InitializePath()
@@ -30,7 +29,7 @@ namespace Onliner
 
         public static void InitializeReporter(string projectPath, string testName)
         {
-            Reporter.htmlReporter = new ExtentHtmlReporter(projectPath + "Reports\\"+ testName + "\\" + testName + ".html");
+            Reporter.htmlReporter = new ExtentHtmlReporter($"{projectPath}Reports\\{testName}\\ .html");
             Reporter.htmlReporter.Config.DocumentTitle = "Test Report";
             Reporter.htmlReporter.Config.ReportName = " Artem ";
             Reporter.extent = new ExtentReports();

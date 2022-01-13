@@ -1,9 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using NUnit.Framework;
-using Onliner.ActionsWaits;
 using Onliner.Pages;
 using System;
-using System.Threading;
 
 namespace Onliner.Cases
 {
@@ -18,16 +16,16 @@ namespace Onliner.Cases
         [OneTimeSetUp]
         public void InitializeComponent()
         {
-            
             Initialize.InitializeDriver();
-            Initialize.InitializeWaitDriver();
         }
 
         [SetUp]
         public void InitializeReporterForBuyProductTest()
         {
+            Initialize.GoToBaseUrl();
             string reportPath = Initialize.InitializePath();
-            Initialize.InitializeReporter(reportPath, BuyProduct);
+            var testName = TestContext.CurrentContext.Test.Name;
+            Initialize.InitializeReporter(reportPath, testName);
         }
 
         [Test]
@@ -41,7 +39,7 @@ namespace Onliner.Cases
             Page.ProductPage.ClickSellersOffersButton();
             Page.ProductPage.ClickSellerButton();
             //Page.ProductPage.SelectCity();
-            Page.ProductPage.ClickCartButton();           
+            Page.ProductPage.ClickCartButton();
             Page.Cart.ClickOrderButton();
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
@@ -51,6 +49,7 @@ namespace Onliner.Cases
         {
             Reporter.test = Reporter.extent.CreateTest(SeacrhItem).Info("Test Started");
             Page.Menu.FillSerachBar();
+            Assert.IsTrue(Page.Menu.IsSearchItemContains(TestSettings.SearchItem));
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -59,6 +58,8 @@ namespace Onliner.Cases
         {
             Reporter.test = Reporter.extent.CreateTest(LogIn).Info("Test Started");
             Login();
+            Page.Menu.ClickUserMenuBatton();
+            Assert.AreEqual(Page.Menu.AccName.Text, TestSettings.UserId);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -66,7 +67,9 @@ namespace Onliner.Cases
         public void NavigateToCatalogTest()
         {
             Reporter.test = Reporter.extent.CreateTest(NavigateToCatalog).Info("Test Started");
-            Page.Menu.OpenCatalogButton();          
+            Page.Menu.OpenCatalogButton();
+            Assert.AreEqual(Driver.driver.Title, "Каталог Onlíner");
+            Assert.AreEqual(Page.Catalog.ElectronicsText.Text, "Электроника");
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -74,7 +77,6 @@ namespace Onliner.Cases
         public void ProductComparisonTest()
         {
             Reporter.test = Reporter.extent.CreateTest(ProductComparison).Info("test started");
-            Page.Menu.CatalogButton.WaitForElementIsDisplayed();
             Page.Menu.OpenCatalogButton();
             Page.Catalog.NavigateToTvPage();
             Page.TVPage.ClickFirstProductButton();
@@ -82,24 +84,27 @@ namespace Onliner.Cases
             Page.ProductPage.ClickTvCatalogButton();
             Page.TVPage.ClickSecondProductButton();
             Page.ProductPage.ClickComparisonButton();
+            Assert.AreEqual(Page.Menu.CompareText.Text, "2 товара");
             Page.Menu.OpenCompareButton();
+            Assert.IsTrue(Page.ComparePage.AreDifferentParametersHighlighted());
             Reporter.test.Log(Status.Pass, "test passed");
         }
 
         [TearDown]
         public void CleanUpAfterTest()
         {
-            //if (Page.OrderPage.OrderPageIsOpend() == true)
-            //{
-            //    Page.OrderPage.OpenCatalogButton();
-            //}
+            if (Page.OrderPage.OrderText.IsPresent() == true)
+            {
+                Page.OrderPage.OpenCatalogButton();
+            }
 
-            //if (Page.Menu.IsCartContains() == true)
-            //{
-            //    Page.Menu.ClickCartButton();
-            //    Page.Cart.ClickDeleteButton();
-            //    Page.Cart.ClickHomePageButton();
-            //}
+            if (Page.Menu.CartBanner.IsPresent() == true)
+            {
+                Page.Menu.ClickCartButton();
+                Page.Cart.ClickToDeleteButton();
+                Page.Cart.OpenHomePageButton();
+                Console.WriteLine("Очистка Корзины удалась");
+            }
 
             if (Page.Menu.UserMenu.IsPresent() == true)
             {
