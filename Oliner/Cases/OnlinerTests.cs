@@ -40,7 +40,13 @@ namespace Onliner.Cases
             Page.ProductPage.ClickSellerButton();
             //Page.ProductPage.SelectCity();
             Page.ProductPage.ClickCartButton();
+            Page.Cart.TvName.WaitForElementIsDisplayed();
+            Assert.AreEqual(Page.Cart.TvName.Text, "Телевизор LG 65UP75006LF");
+            Page.Cart.QuantityOfProduct.WaitForElementIsDisplayed();
+            Assert.AreEqual(Page.Cart.QuantityOfProduct.Text, "1 товар на сумму:");
             Page.Cart.ClickOrderButton();
+            Page.OrderPage.Price.WaitForElementIsDisplayed();
+            Assert.AreEqual(Page.OrderPage.Price.Text, "1940,78 р.");
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
