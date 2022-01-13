@@ -12,8 +12,7 @@ namespace Onliner
         {
             Driver.driver = new ChromeDriver();
             Driver.driver.Manage().Window.Maximize();
-            Driver.driver.Navigate().GoToUrl(Config.baseUrl);
-            
+            Driver.driver.Navigate().GoToUrl(Config.baseUrl);   
         }
 
         public static void InitializeWaitDriver()

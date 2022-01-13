@@ -1,4 +1,4 @@
-﻿namespace Onliner.Actions
+﻿namespace Onliner.ActionsWaits
 {
     public static class ActionsWait
     {
