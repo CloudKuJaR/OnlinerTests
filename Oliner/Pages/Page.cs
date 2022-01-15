@@ -11,17 +11,17 @@ namespace Onliner.Pages
             return page;
         }
 
-        public static CartPage Cart
+        public static CartPage CartPage
         {
             get { return GetPage<CartPage>(); }
         }
 
-        public static CatalogPage Catalog
+        public static CatalogPage CatalogPage
         {
             get { return GetPage<CatalogPage>(); }
         }
 
-        public static LoginForm Login
+        public static LoginForm LoginPage
         {
             get { return GetPage<LoginForm>(); }
         }
@@ -49,6 +49,21 @@ namespace Onliner.Pages
         public static ComparePage ComparePage
         {
             get { return GetPage<ComparePage>(); }
+        }
+
+        public static LaptopsPage LaptopsPage
+        {
+            get { return GetPage<LaptopsPage>(); }
+        }
+
+        public static ProductsCatalogPage ProductsCatalogPage
+        {
+            get { return GetPage<ProductsCatalogPage>(); }
+        }
+
+        public static RegistrationPage RegistrationPage
+        {
+            get { return GetPage<RegistrationPage>(); }
         }
     }
 }

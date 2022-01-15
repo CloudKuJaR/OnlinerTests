@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Onliner.Pages;
 using System;
+using System.Threading;
 
 namespace Onliner.Cases
 {
@@ -12,6 +13,8 @@ namespace Onliner.Cases
         private string LogIn = "LogInTest";
         private string NavigateToCatalog = "NavigateToCatalogTest";
         private string ProductComparison = "ProductComparisonTest";
+        private string FilterCatalog = "FilterCatalogtext";
+        private string Registration = "RegistrationTest";
 
         [OneTimeSetUp]
         public void InitializeComponent()
@@ -34,17 +37,17 @@ namespace Onliner.Cases
             Reporter.test = Reporter.extent.CreateTest(BuyProduct).Info("Test Started");
             Login();
             Page.Menu.OpenCatalogButton();
-            Page.Catalog.NavigateToTvPage();
+            Page.CatalogPage.NavigateToTvPage();
             Page.TVPage.ClickFirstProductButton();
             Page.ProductPage.ClickSellersOffersButton();
             Page.ProductPage.ClickSellerButton();
             //Page.ProductPage.SelectCity();
             Page.ProductPage.ClickCartButton();
-            Page.Cart.TvName.WaitForElementIsDisplayed();
-            Assert.AreEqual(Page.Cart.TvName.Text, "Телевизор LG 65UP75006LF");
-            Page.Cart.QuantityOfProduct.WaitForElementIsDisplayed();
-            Assert.AreEqual(Page.Cart.QuantityOfProduct.Text, "1 товар на сумму:");
-            Page.Cart.ClickOrderButton();
+            Page.CartPage.TvName.WaitForElementIsDisplayed();
+            Assert.AreEqual(Page.CartPage.TvName.Text, "Телевизор LG 65UP75006LF");
+            Page.CartPage.QuantityOfProduct.WaitForElementIsDisplayed();
+            Assert.AreEqual(Page.CartPage.QuantityOfProduct.Text, "1 товар на сумму:");
+            Page.CartPage.OpenOrderPageButton();
             Page.OrderPage.Price.WaitForElementIsDisplayed();
             Assert.AreEqual(Page.OrderPage.Price.Text, "1940,78 р.");
             Reporter.test.Log(Status.Pass, "Test Passed");
@@ -75,7 +78,7 @@ namespace Onliner.Cases
             Reporter.test = Reporter.extent.CreateTest(NavigateToCatalog).Info("Test Started");
             Page.Menu.OpenCatalogButton();
             Assert.AreEqual(Driver.driver.Title, "Каталог Onlíner");
-            Assert.AreEqual(Page.Catalog.ElectronicsText.Text, "Электроника");
+            Assert.AreEqual(Page.CatalogPage.ElectronicsText.Text, "Электроника");
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -84,16 +87,49 @@ namespace Onliner.Cases
         {
             Reporter.test = Reporter.extent.CreateTest(ProductComparison).Info("test started");
             Page.Menu.OpenCatalogButton();
-            Page.Catalog.NavigateToTvPage();
+            Page.CatalogPage.NavigateToTvPage();
             Page.TVPage.ClickFirstProductButton();
+            //Page.ProductsCatalogPage.OpenProductButton(0);
             Page.ProductPage.ClickComparisonButton();
             Page.ProductPage.ClickTvCatalogButton();
             Page.TVPage.ClickSecondProductButton();
+            //Page.ProductsCatalogPage.OpenProductButton(1);
             Page.ProductPage.ClickComparisonButton();
             Assert.AreEqual(Page.Menu.CompareText.Text, "2 товара");
             Page.Menu.OpenCompareButton();
             Assert.IsTrue(Page.ComparePage.AreDifferentParametersHighlighted());
             Reporter.test.Log(Status.Pass, "test passed");
+        }
+
+        [Test]
+        public void FilterCatalogTest()
+        {
+            Reporter.test = Reporter.extent.CreateTest(FilterCatalog).Info("Test Started");
+            Page.Menu.OpenCatalogButton();
+            Page.CatalogPage.NavigateToLaptopPage();
+            Reporter.test.Log(Status.Pass, "Test Passed");
+        }
+
+        [Test]
+        public void RegistarationTest()
+        {
+            Reporter.test = Reporter.extent.CreateTest(Registration).Info("Test Started");
+            Page.Menu.ClickLoginForm();
+            Assert.IsTrue(Page.LoginPage.AuthFormTitle.IsPresent());
+            Page.LoginPage.OpenRegistrationPage();
+            Assert.IsTrue(Page.RegistrationPage.RegistrationFormTitle.IsPresent());
+            Page.RegistrationPage.FillEmailField();
+            Assert.IsTrue(Page.RegistrationPage.EmailFieldHightLightedAndGreen.IsPresent());
+            Page.RegistrationPage.ClickCheckBox();
+            Page.RegistrationPage.ClickRegistrationButton();
+            Assert.IsTrue(Page.RegistrationPage.PasswordFieldHightLightedAndRed.IsPresent());
+            Assert.IsTrue(Page.RegistrationPage.PasswordDescriptionError.IsPresent());
+            Page.RegistrationPage.FillPasswordFields();
+            Assert.AreEqual(Page.RegistrationPage.PasswordDescription.Text, "Очень надежный пароль, 12 символов");
+            Page.RegistrationPage.ClickRegistrationButton();
+            Assert.IsTrue(Page.RegistrationPage.RegestrationConfirmationTitle.IsPresent());
+            Assert.IsTrue(Page.RegistrationPage.GoToMailButton.IsPresent());
+            Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
         [TearDown]
@@ -107,8 +143,8 @@ namespace Onliner.Cases
             if (Page.Menu.CartBanner.IsPresent() == true)
             {
                 Page.Menu.ClickCartButton();
-                Page.Cart.ClickToDeleteButton();
-                Page.Cart.OpenHomePageButton();
+                Page.CartPage.ClickToDeleteButton();
+                Page.CartPage.OpenHomePageButton();
                 Console.WriteLine("Очистка Корзины удалась");
             }
 
@@ -131,7 +167,7 @@ namespace Onliner.Cases
         private void Login()
         {
             Page.Menu.ClickLoginForm();
-            Page.Login.FillLoginForm();
+            Page.LoginPage.FillLoginForm();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Onliner.Pages
         public MyWebElement QuantityOfProduct => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCT));
 
 
-        public void ClickOrderButton()
+        public void OpenOrderPageButton()
         {
             OrderButton.Click();
         }
