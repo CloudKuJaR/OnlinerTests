@@ -65,5 +65,20 @@ namespace Onliner.Pages
         {
             get { return GetPage<RegistrationPage>(); }
         }
+
+        public static HomePage HomePage
+        {
+            get { return GetPage<HomePage>(); }
+        }
+
+        public static ArcticlePage ArcticlePage
+        {
+            get { return GetPage<ArcticlePage>(); }
+        }
+
+        public static UserSupportPage UserSupportPage
+        {
+            get { return GetPage<UserSupportPage>(); }
+        }
     }
 }

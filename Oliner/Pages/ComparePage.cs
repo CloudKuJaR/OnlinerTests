@@ -10,7 +10,7 @@ namespace Onliner.Pages
         public bool AreDifferentParametersHighlighted()
         {
             var comparasionValues = ComparsionContainer.FindElements(By.XPath("./td//span[@class='value__text']"));
-
+     
             return comparasionValues[0].Text != comparasionValues[1].Text; 
         }
     }

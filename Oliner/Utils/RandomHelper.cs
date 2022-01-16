@@ -2,6 +2,7 @@
 
 namespace Onliner.Utils
 {
+    // Нужен ли???
     public class RandomHelper
     {
         public string GetRandomString()
