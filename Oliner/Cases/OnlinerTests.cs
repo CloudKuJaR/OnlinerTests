@@ -172,7 +172,10 @@ namespace Onliner.Cases
             Assert.IsTrue(Page.UserSupportPage.EmailFieldError.IsPresent());
             Page.UserSupportPage.FillEmailFieldWithValidCredentials();
             Assert.IsTrue(Page.UserSupportPage.EmailFieldError.IsRemoved());
-
+            Assert.IsTrue(Page.UserSupportPage.DropDownMenusOptionsCount());
+            Assert.IsTrue(Page.UserSupportPage.IsDiscriptionsPresent());
+            Assert.IsTrue(Page.UserSupportPage.IsCaptchaPresent());
+            Assert.IsTrue(Page.UserSupportPage.IsAddButtonPresent());
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
