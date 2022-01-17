@@ -2,21 +2,23 @@
 using NUnit.Framework;
 using Onliner.Pages;
 using System;
-using System.Threading;
 
 namespace Onliner.Cases
 {
     class OnlinerTests
     {
-        private string BuyProduct = "BuyProductTest";
-        private string SeacrhItem = "SeacrhItemTest";
-        private string LogIn = "LogInTest";
-        private string NavigateToCatalog = "NavigateToCatalogTest";
-        private string ProductComparison = "ProductComparisonTest";
-        private string FilterCatalog = "FilterCatalogtext";
-        private string Registration = "RegistrationTest";
-        private string EstimationArticle = "EstimationArticleTest";
-        private string UserSupport = "UserSupportTest";
+        private string maxFrequency = "165hz";
+        private string minFrequency = "120hz";
+        private string quantityOfProducts = "1 товар на сумму:";
+        private string catalogPageTitle = "Каталог Onlíner";
+        private string catalogElectronicsText = "Электроника";
+        private string quantityOfComparableProducts = "2 товара";
+        private string laptopsPageTitle = "Ноутбуки";
+        private string nameOfManufacturer = "asus";
+        private string nameOfManufacturerInFilterContainer = "ASUS";
+        private string frequencyInFilterContainer = "120 Гц — 165 Гц";
+        private string superPriceInFilterContainer = "Суперцена";
+        private string passwordDescription = "Очень надежный пароль, 12 символов";
 
         [OneTimeSetUp]
         public void InitializeComponent()
@@ -31,17 +33,17 @@ namespace Onliner.Cases
             string reportPath = Initialize.InitializePath();
             var testName = TestContext.CurrentContext.Test.Name;
             Initialize.InitializeReporter(reportPath, testName);
+            Reporter.test = Reporter.extent.CreateTest(testName).Info("Test Started");
         }
 
         [Test]
         public void BuyProductTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(BuyProduct).Info("Test Started");
             Login();
             Page.Menu.OpenCatalogButton();
             Page.CatalogPage.NavigateToTvPage();
             //Page.TVPage.ClickFirstProductButton();
-            Page.ProductsCatalogPage.OpenProductButton(0);
+            Page.ProductsCatalogPage.OpenProductPage(0);
             Page.ProductPage.ClickSellersOffersButton();
             Page.ProductPage.ClickSellerButton();
             Page.ProductPage.SelectCity();
@@ -49,7 +51,7 @@ namespace Onliner.Cases
             Page.CartPage.TvName.WaitForElementIsDisplayed();
             Assert.AreEqual(Page.CartPage.TvName.Text, Page.CartPage.TvName.Text);
             Page.CartPage.QuantityOfProduct.WaitForElementIsDisplayed();
-            Assert.AreEqual(Page.CartPage.QuantityOfProduct.Text, "1 товар на сумму:");
+            Assert.AreEqual(Page.CartPage.QuantityOfProduct.Text, quantityOfProducts);
             Page.CartPage.OpenOrderPageButton();
             Page.OrderPage.Price.WaitForElementIsDisplayed();
             Assert.AreEqual(Page.OrderPage.Price.Text, Page.OrderPage.Price.Text);
@@ -59,7 +61,6 @@ namespace Onliner.Cases
         [Test]
         public void SeacrhItemTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(SeacrhItem).Info("Test Started");
             Page.Menu.FillSerachBar();
             Assert.IsTrue(Page.Menu.IsSearchItemContains(TestSettings.SearchItem));
             Reporter.test.Log(Status.Pass, "Test Passed");
@@ -68,7 +69,6 @@ namespace Onliner.Cases
         [Test]
         public void LogInTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(LogIn).Info("Test Started");
             Login();
             Page.Menu.ClickUserMenuBatton();
             Assert.AreEqual(Page.Menu.AccName.Text, TestSettings.UserId);
@@ -78,27 +78,23 @@ namespace Onliner.Cases
         [Test]
         public void NavigateToCatalogTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(NavigateToCatalog).Info("Test Started");
             Page.Menu.OpenCatalogButton();
-            Assert.AreEqual(Driver.driver.Title, "Каталог Onlíner");
-            Assert.AreEqual(Page.CatalogPage.ElectronicsText.Text, "Электроника");
+            Assert.AreEqual(Driver.driver.Title, catalogPageTitle);
+            Assert.AreEqual(Page.CatalogPage.ElectronicsText.Text, catalogElectronicsText);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
         [Test]
         public void ProductComparisonTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(ProductComparison).Info("test started");
             Page.Menu.OpenCatalogButton();
             Page.CatalogPage.NavigateToTvPage();
-            //Page.TVPage.ClickFirstProductButton();
-            Page.ProductsCatalogPage.OpenProductButton(0);
+            Page.ProductsCatalogPage.OpenProductPage(0);
             Page.ProductPage.ClickComparisonButton();
             Page.ProductPage.ClickTvCatalogButton();
-            //Page.TVPage.ClickSecondProductButton();
-            Page.ProductsCatalogPage.OpenProductButton(1);
+            Page.ProductsCatalogPage.OpenProductPage(1);
             Page.ProductPage.ClickComparisonButton();
-            Assert.AreEqual(Page.Menu.CompareText.Text, "2 товара");
+            Assert.AreEqual(Page.Menu.CompareText.Text, quantityOfComparableProducts);
             Page.Menu.OpenCompareButton();
             Assert.IsTrue(Page.ComparePage.AreDifferentParametersHighlighted());
             Reporter.test.Log(Status.Pass, "test passed");
@@ -107,27 +103,31 @@ namespace Onliner.Cases
         [Test]
         public void FilterCatalogTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(FilterCatalog).Info("Test Started");
             Page.Menu.OpenCatalogButton();
             Page.CatalogPage.NavigateToLaptopPage();
-            Assert.AreEqual(Page.LaptopsPage.LaptopsPageTitle.Text, "Ноутбуки");
-            Page.LaptopsPage.ClickAsusCheckBox();
-            Assert.IsTrue(Page.LaptopsPage.FilterContainerAsus.IsPresent());
-            Page.LaptopsPage.ChangeMinFrequency();
-            Page.LaptopsPage.ChangeMaxFrequency();
-            Assert.IsTrue(Page.LaptopsPage.FilterContainerMinMaxFrequency.IsPresent());
+            Assert.AreEqual(Page.LaptopsPage.LaptopsPageTitle.Text, laptopsPageTitle);
+            Page.LaptopsPage.ClickManufactureContainerButton();
+            Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
+            Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(nameOfManufacturerInFilterContainer));
+            //int firstValue = Page.LaptopsPage.GetQuantityOfProducts();
+            Page.LaptopsPage.ChangeMinFrequency(minFrequency);
+            Page.LaptopsPage.ChangeMaxFrequency(maxFrequency);
+            //int secondValue = Page.LaptopsPage.GetQuantityOfProducts();
+            Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(frequencyInFilterContainer));
+            //Assert.IsTrue(Page.LaptopsPage.ComparingTheQuantityOfProducts(firstValue, secondValue));
             Page.LaptopsPage.ClickSuperPriceCheckBox();
-            Assert.IsTrue(Page.LaptopsPage.FilterContainerSuperPrice.IsPresent());
+            Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(superPriceInFilterContainer));
             Assert.IsTrue(Page.LaptopsPage.SuperPriceProductCount());
-            Page.LaptopsPage.ClickAsusCheckBox();
-            Assert.IsTrue(Page.LaptopsPage.FilterContainerAsus.IsRemoved());
+            Page.LaptopsPage.ClickManufactureContainerButton();
+            Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
+            Page.LaptopsPage.ClickManufactureContainerButton();
+            Assert.IsFalse(Page.LaptopsPage.FilterContanerContais(nameOfManufacturerInFilterContainer));
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
         [Test]
         public void RegistarationTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(Registration).Info("Test Started");
             Page.Menu.ClickLoginForm();
             Assert.IsTrue(Page.LoginPage.AuthFormTitle.IsPresent());
             Page.LoginPage.OpenRegistrationPage();
@@ -139,7 +139,7 @@ namespace Onliner.Cases
             Assert.IsTrue(Page.RegistrationPage.PasswordFieldHightLightedAndRed.IsPresent());
             Assert.IsTrue(Page.RegistrationPage.PasswordDescriptionError.IsPresent());
             Page.RegistrationPage.FillPasswordFields();
-            Assert.AreEqual(Page.RegistrationPage.PasswordDescription.Text, "Очень надежный пароль, 12 символов");
+            Assert.AreEqual(Page.RegistrationPage.PasswordDescription.Text, passwordDescription);
             Page.RegistrationPage.ClickRegistrationButton();
             Assert.IsTrue(Page.RegistrationPage.RegestrationConfirmationTitle.IsPresent());
             Assert.IsTrue(Page.RegistrationPage.GoToMailButton.IsPresent());
@@ -149,20 +149,21 @@ namespace Onliner.Cases
         [Test]
         public void EstimationArticleTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(EstimationArticle).Info("Test Started");
             Page.HomePage.OpenCarsArticleTeaser();
+            int firstValue = Page.ArcticlePage.GetSlightSmilesValues();
             Page.ArcticlePage.ClickSlightSmile();
+            int secondValue = Page.ArcticlePage.GetSlightSmilesValues();
             Assert.IsTrue(Page.ArcticlePage.SlightSmileSelected.IsPresent());
-            Assert.IsTrue(Page.ArcticlePage.SlightSmilesNumberIsBigger());
+            Assert.AreNotEqual(firstValue, secondValue);
             Page.ArcticlePage.ClickSlightSmile();
-            //Написать ассерт на проверку оценки, а также изменить существующий метод.
+            int thirdValue = Page.ArcticlePage.GetSlightSmilesValues();
+            Assert.AreEqual(secondValue, thirdValue);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
         [Test]
         public void UserSupportTest()
         {
-            Reporter.test = Reporter.extent.CreateTest(UserSupport).Info("Test Started");
             Page.HomePage.OpenUserSupprotPage();
             Assert.IsTrue(Page.UserSupportPage.UserSupportPageTitle.IsPresent());
             Page.UserSupportPage.FillUserNameField();

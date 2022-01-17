@@ -36,11 +36,6 @@ namespace Onliner.Pages
             get { return GetPage<ProductPage>(); }
         }
 
-        public static TVPage TVPage
-        {
-            get { return GetPage<TVPage>(); }
-        }
-
         public static OrderPage OrderPage
         {
             get { return GetPage<OrderPage>(); }

@@ -70,7 +70,7 @@ namespace Onliner.Pages
             var ListOfSeacrhResults = Driver.driver.FindElements(By.XPath("//a[@class='product__title-link']"));
             foreach (var item in ListOfSeacrhResults)
             {
-                if(!item.Text.Contains(searchItem))
+                if (!item.Text.Contains(searchItem))
                 {
                     isContains = false;
                     break;

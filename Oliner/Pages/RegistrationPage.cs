@@ -1,4 +1,5 @@
-﻿using Onliner.WebElementExtension;
+﻿using Onliner.Utils;
+using Onliner.WebElementExtension;
 using OpenQA.Selenium;
 using System;
 
@@ -9,7 +10,7 @@ namespace Onliner.Pages
         public const string EMAIL_FIELD = "//input[@type='email']";
         public const string PASSWORD_FIELD = "//input[@type='password']";
         public const string REPEAT_PASSWORD_FIELD = "(//input[@type='password'])[2]";
-        public const string CHECK_BOX = "//span[@class='i-checkbox__faux']";
+        public const string ACCEPT_PRIVACY_CHECK_BOX = "//span[@class='i-checkbox__faux']";
         public const string REGISRATION_BUTTON = "//button[@type='submit']";
         public const string REGISTRATION_FORM_TITLE = "//div[contains(@class,'auth-form__title')]";
         public const string EMAIL_FIELD_HIGHTLIGHTED_AND_GREEN = "//input[contains(@class,'auth-input_success')]";
@@ -20,9 +21,9 @@ namespace Onliner.Pages
         public const string GO_TO_MAIL_BUTTON = "//a[contains(@class,'auth-button_appendant')]";
 
         public MyWebElement EmailField => new MyWebElement(By.XPath(EMAIL_FIELD));
-        public MyWebElement PasswordField  => new MyWebElement(By.XPath(PASSWORD_FIELD));
+        public MyWebElement PasswordField => new MyWebElement(By.XPath(PASSWORD_FIELD));
         public MyWebElement RepeatPasswordField => new MyWebElement(By.XPath(REPEAT_PASSWORD_FIELD));
-        public MyWebElement CheckBox  => new MyWebElement(By.XPath(CHECK_BOX));
+        public MyWebElement CheckBox => new MyWebElement(By.XPath(ACCEPT_PRIVACY_CHECK_BOX));
         public MyWebElement RegisrationButton => new MyWebElement(By.XPath(REGISRATION_BUTTON));
         public MyWebElement RegistrationFormTitle => new MyWebElement(By.XPath(REGISTRATION_FORM_TITLE));
         public MyWebElement EmailFieldHightLightedAndGreen => new MyWebElement(By.XPath(EMAIL_FIELD_HIGHTLIGHTED_AND_GREEN));
@@ -34,14 +35,7 @@ namespace Onliner.Pages
 
         public void FillEmailField()
         {
-            char[] letters = "qwertyuiopasdfghzxcvb".ToCharArray();
-            Random r = new Random();
-            string randomString = "";
-            for (int i = 0; i < 4; i++)
-            {
-                randomString += letters[r.Next(0, 21)].ToString();
-            }
-
+            string randomString = RandomHelper.GetRandomString();
             EmailField.SendKeys($"{randomString}@mail.com");
         }
 

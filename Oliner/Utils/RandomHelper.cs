@@ -2,10 +2,9 @@
 
 namespace Onliner.Utils
 {
-    // Нужен ли???
-    public class RandomHelper
+    public static class RandomHelper
     {
-        public string GetRandomString()
+        public static string GetRandomString()
         {
             char[] letters = "qwertyuiopasdfghzxcvb".ToCharArray();
             Random r = new Random();

@@ -12,7 +12,7 @@ namespace Onliner.Pages
         public const string TV_CATALOG_BUTTON = "//span[text()='Телевизоры']";
         public const string CONFIRM_CITY_BUTTON = "//span[@class='button-style button-style_another button-style_base offers-form__button']";
         public const string NEW_SELLERS = "//a[@href='https://b2breg.onliner.by/reg']";
-        
+
         public MyWebElement SellersOffers => new MyWebElement(By.XPath(SELLERS_OFFERS));
         public MyWebElement Seller => new MyWebElement(By.XPath(SELLER));
         public MyWebElement Cart => new MyWebElement(By.XPath(CART));

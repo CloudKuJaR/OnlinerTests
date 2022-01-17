@@ -18,17 +18,12 @@ namespace Onliner.Pages
             SlightSmile.Click();
         }
 
-        public bool SlightSmilesNumberIsBigger()
+        public int GetSlightSmilesValues()
         {
-            int currentValue = int.Parse(SlightSmileCount.Text);
-            int startValue = currentValue - 1;
-            bool isBigger = false;
-            if(currentValue == startValue + 1)
-            {
-                isBigger = true;
-            }
-            return isBigger;
+            return int.Parse(SlightSmileCount.Text);
         }
+
+
 
     }
 }
