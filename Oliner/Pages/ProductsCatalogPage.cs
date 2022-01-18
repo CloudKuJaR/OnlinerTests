@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Linq;
 
 namespace Onliner.Pages
 {
@@ -12,6 +13,7 @@ namespace Onliner.Pages
         public const string MANUFACTURER_CONTAINER_DROP_DOWN_MENU = "(//div[@class='schema-filter-control__item'])[2]/..";
         public const string SUPER_PRICE = "//div[@class='schema-filter__facet schema-filter__facet_specific']//span[@class='i-checkbox']";
         public const string QUANTITY_OF_PRODUCTS = "//span[@class='schema-filter-button__sub schema-filter-button__sub_main']";
+        private const string MANUFACTURER_LOCATOR = "(//div[@class='schema-filter-popover__inner'])[2]//input[@value='{0}']/..";
 
         public MyWebElement SuperPrice => new MyWebElement(By.XPath(SUPER_PRICE));
         public MyWebElement ProductsContainer => new MyWebElement(By.XPath(PRODUCTS_CONTAINER));
@@ -32,15 +34,17 @@ namespace Onliner.Pages
             ManufacturerContainerDropDownMenu.Click();
         }
 
-        public void ChooseManufacturer(string ManufacturerName)
-        {
-            Driver.driver.FindElement(By.XPath($"(//div[@class='schema-filter-popover__inner'])[2]//input[@value='{ManufacturerName}']/..")).Click();
-        }
+        public void ChooseManufacturer(string ManufacturerName) => new MyWebElement(By.XPath(string.Format(MANUFACTURER_LOCATOR, ManufacturerName))).Click();
 
         public int GetQuantityOfProducts()
         {
             QuantityOfProducts.WaitForElementIsDisplayed();
-            return int.Parse(QuantityOfProducts.Text);
+            string productsQuantityString = QuantityOfProducts.Text;
+            int quantityOfProductsValue = int.Parse(string.Join("", productsQuantityString.Where(c => char.IsDigit(c))));
+
+
+
+            return quantityOfProductsValue;
         }
 
         public bool ComparingTheQuantityOfProducts(int oldValue, int newValue)

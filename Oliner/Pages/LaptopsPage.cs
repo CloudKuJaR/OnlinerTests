@@ -35,16 +35,16 @@ namespace Onliner.Pages
 
         public bool SuperPriceProductCount()
         {
-            //var wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
+            var wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
 
-            //wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']")).Count != 0);
+            wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']")).Count != 0);
 
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             var Products = ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']"));
 
-            //wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']")).Count != 0);
+            wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']")).Count != 0);
 
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             var SuperPriceBanner = ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']"));
 
             return Products.Count == SuperPriceBanner.Count;

@@ -42,7 +42,6 @@ namespace Onliner.Cases
             Login();
             Page.Menu.OpenCatalogButton();
             Page.CatalogPage.NavigateToTvPage();
-            //Page.TVPage.ClickFirstProductButton();
             Page.ProductsCatalogPage.OpenProductPage(0);
             Page.ProductPage.ClickSellersOffersButton();
             Page.ProductPage.ClickSellerButton();
@@ -106,15 +105,17 @@ namespace Onliner.Cases
             Page.Menu.OpenCatalogButton();
             Page.CatalogPage.NavigateToLaptopPage();
             Assert.AreEqual(Page.LaptopsPage.LaptopsPageTitle.Text, laptopsPageTitle);
+            int firstValue = Page.LaptopsPage.GetQuantityOfProducts();
             Page.LaptopsPage.ClickManufactureContainerButton();
             Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
             Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(nameOfManufacturerInFilterContainer));
-            //int firstValue = Page.LaptopsPage.GetQuantityOfProducts();
+            int secondValue = Page.LaptopsPage.GetQuantityOfProducts();
+            Assert.IsTrue(Page.LaptopsPage.ComparingTheQuantityOfProducts(firstValue, secondValue));
             Page.LaptopsPage.ChangeMinFrequency(minFrequency);
             Page.LaptopsPage.ChangeMaxFrequency(maxFrequency);
-            //int secondValue = Page.LaptopsPage.GetQuantityOfProducts();
+            
             Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(frequencyInFilterContainer));
-            //Assert.IsTrue(Page.LaptopsPage.ComparingTheQuantityOfProducts(firstValue, secondValue));
+            
             Page.LaptopsPage.ClickSuperPriceCheckBox();
             Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(superPriceInFilterContainer));
             Assert.IsTrue(Page.LaptopsPage.SuperPriceProductCount());
@@ -177,6 +178,18 @@ namespace Onliner.Cases
             Assert.IsTrue(Page.UserSupportPage.IsDiscriptionsPresent());
             Assert.IsTrue(Page.UserSupportPage.IsCaptchaPresent());
             Assert.IsTrue(Page.UserSupportPage.IsAddButtonPresent());
+            Reporter.test.Log(Status.Pass, "Test Passed");
+        }
+
+        [Test]
+        public void CurrencyConversionTest()
+        {
+            Page.HomePage.OpenCurrencyConversionPage();
+            Page.CurrencyConversionPage.ClickBuyButton();
+            string firstAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
+            Page.CurrencyConversionPage.FillAmountCurrencyField();
+            string secondAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
+            Assert.AreEqual(firstAmountCurrencyFieldValue,secondAmountCurrencyFieldValue);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 

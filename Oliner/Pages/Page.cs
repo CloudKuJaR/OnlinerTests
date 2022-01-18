@@ -75,5 +75,10 @@ namespace Onliner.Pages
         {
             get { return GetPage<UserSupportPage>(); }
         }
+
+        public static CurrencyConversionPage CurrencyConversionPage
+        {
+            get { return GetPage<CurrencyConversionPage>(); }
+        }
     }
 }
