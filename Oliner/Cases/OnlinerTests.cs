@@ -19,6 +19,12 @@ namespace Onliner.Cases
         private string frequencyInFilterContainer = "120 Гц — 165 Гц";
         private string superPriceInFilterContainer = "Суперцена";
         private string passwordDescription = "Очень надежный пароль, 12 символов";
+        private string eur = "eur";
+        private string conversionResultTypeOfCurrency = "BYN";
+        private string currencyTypeTextForUSD = "1 USD";
+        private string currencyTypeTextForEUR = "1 EUR";
+        private string currencyTypeTextForRUB = "100 RUB";
+        private string currencyConversionPageTitle = "Лучшие курсы валют";
 
         [OneTimeSetUp]
         public void InitializeComponent()
@@ -43,17 +49,19 @@ namespace Onliner.Cases
             Page.Menu.OpenCatalogButton();
             Page.CatalogPage.NavigateToTvPage();
             Page.ProductsCatalogPage.OpenProductPage(0);
+            string productName = Page.ProductPage.GetProductName();
             Page.ProductPage.ClickSellersOffersButton();
             Page.ProductPage.ClickSellerButton();
             Page.ProductPage.SelectCity();
             Page.ProductPage.ClickCartButton();
             Page.CartPage.TvName.WaitForElementIsDisplayed();
-            Assert.AreEqual(Page.CartPage.TvName.Text, Page.CartPage.TvName.Text);
+            Assert.AreEqual(Page.CartPage.TvName.Text, productName);
             Page.CartPage.QuantityOfProduct.WaitForElementIsDisplayed();
             Assert.AreEqual(Page.CartPage.QuantityOfProduct.Text, quantityOfProducts);
+            string productPrice = Page.CartPage.GetProductPrice();
             Page.CartPage.OpenOrderPageButton();
             Page.OrderPage.Price.WaitForElementIsDisplayed();
-            Assert.AreEqual(Page.OrderPage.Price.Text, Page.OrderPage.Price.Text);
+            Assert.AreEqual(Page.OrderPage.Price.Text, productPrice);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -94,7 +102,7 @@ namespace Onliner.Cases
             Page.ProductsCatalogPage.OpenProductPage(1);
             Page.ProductPage.ClickComparisonButton();
             Assert.AreEqual(Page.Menu.CompareText.Text, quantityOfComparableProducts);
-            Page.Menu.OpenCompareButton();
+            Page.Menu.OpenComparePage();
             Assert.IsTrue(Page.ComparePage.AreDifferentParametersHighlighted());
             Reporter.test.Log(Status.Pass, "test passed");
         }
@@ -108,28 +116,28 @@ namespace Onliner.Cases
             int firstValue = Page.LaptopsPage.GetQuantityOfProducts();
             Page.LaptopsPage.ClickManufactureContainerButton();
             Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
-            Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(nameOfManufacturerInFilterContainer));
+            Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(nameOfManufacturerInFilterContainer));
             int secondValue = Page.LaptopsPage.GetQuantityOfProducts();
             Assert.IsTrue(Page.LaptopsPage.ComparingTheQuantityOfProducts(firstValue, secondValue));
             Page.LaptopsPage.ChangeMinFrequency(minFrequency);
             Page.LaptopsPage.ChangeMaxFrequency(maxFrequency);
             
-            Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(frequencyInFilterContainer));
+            Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(frequencyInFilterContainer));
             
             Page.LaptopsPage.ClickSuperPriceCheckBox();
-            Assert.IsTrue(Page.LaptopsPage.FilterContanerContais(superPriceInFilterContainer));
-            Assert.IsTrue(Page.LaptopsPage.SuperPriceProductCount());
+            Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(superPriceInFilterContainer));
+            Assert.IsTrue(Page.LaptopsPage.AreAllProductsContainsSuperPriceBanner());
             Page.LaptopsPage.ClickManufactureContainerButton();
             Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
             Page.LaptopsPage.ClickManufactureContainerButton();
-            Assert.IsFalse(Page.LaptopsPage.FilterContanerContais(nameOfManufacturerInFilterContainer));
+            Assert.IsFalse(Page.LaptopsPage.IsFilterContanerContaisFilter(nameOfManufacturerInFilterContainer));
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
         [Test]
         public void RegistarationTest()
         {
-            Page.Menu.ClickLoginForm();
+            Page.Menu.OpenLoginForm();
             Assert.IsTrue(Page.LoginPage.AuthFormTitle.IsPresent());
             Page.LoginPage.OpenRegistrationPage();
             Assert.IsTrue(Page.RegistrationPage.RegistrationFormTitle.IsPresent());
@@ -155,7 +163,7 @@ namespace Onliner.Cases
             Page.ArcticlePage.ClickSlightSmile();
             int secondValue = Page.ArcticlePage.GetSlightSmilesValues();
             Assert.IsTrue(Page.ArcticlePage.SlightSmileSelected.IsPresent());
-            Assert.AreNotEqual(firstValue, secondValue);
+            Assert.AreEqual(firstValue + 1, secondValue);
             Page.ArcticlePage.ClickSlightSmile();
             int thirdValue = Page.ArcticlePage.GetSlightSmilesValues();
             Assert.AreEqual(secondValue, thirdValue);
@@ -186,11 +194,28 @@ namespace Onliner.Cases
         {
             Page.HomePage.OpenCurrencyConversionPage();
             Page.CurrencyConversionPage.ClickBuyButton();
+            Assert.AreEqual(Page.CurrencyConversionPage.GetCurrecnyPageTitle(), currencyConversionPageTitle);
+            Assert.IsTrue(Page.CurrencyConversionPage.IsTheDateCorrect());
+            Assert.IsTrue(Page.CurrencyConversionPage.IsCurrencyTypePresent(currencyTypeTextForUSD));
+            Assert.IsTrue(Page.CurrencyConversionPage.IsCurrencyTypePresent(currencyTypeTextForEUR));
+            Assert.IsTrue(Page.CurrencyConversionPage.IsCurrencyTypePresent(currencyTypeTextForRUB));
             string firstAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
-            Page.CurrencyConversionPage.FillAmountCurrencyField();
+            Page.CurrencyConversionPage.FillAmountCurrencyFieldWithInvalidData();
             string secondAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
             Assert.AreEqual(firstAmountCurrencyFieldValue,secondAmountCurrencyFieldValue);
+            int randomValue = Page.CurrencyConversionPage.GetRandomValue();
+            Page.CurrencyConversionPage.FillAmountCurrencyFieldWithValidData(randomValue.ToString());
+            Page.CurrencyConversionPage.ChooseTypeOfCurrency(eur);
+            float bankSellingPrice = Page.CurrencyConversionPage.GetBankSellingPrice();
+            Assert.AreEqual(randomValue * bankSellingPrice, Page.CurrencyConversionPage.ConvertConversionResultStringToFloat());
+            Assert.AreEqual(Page.CurrencyConversionPage.ConversionResultTypeOfCurrency.Text, conversionResultTypeOfCurrency);
             Reporter.test.Log(Status.Pass, "Test Passed");
+        }
+
+        [Test]
+        public void RealtyPageTest()
+        {
+
         }
 
         [TearDown]
@@ -203,7 +228,7 @@ namespace Onliner.Cases
 
             if (Page.Menu.CartBanner.IsPresent() == true)
             {
-                Page.Menu.ClickCartButton();
+                Page.Menu.OpenCartPage();
                 Page.CartPage.ClickToDeleteButton();
                 Page.CartPage.OpenHomePageButton();
                 Console.WriteLine("Очистка Корзины удалась");
@@ -227,7 +252,7 @@ namespace Onliner.Cases
 
         private void Login()
         {
-            Page.Menu.ClickLoginForm();
+            Page.Menu.OpenLoginForm();
             Page.LoginPage.FillLoginForm();
         }
     }

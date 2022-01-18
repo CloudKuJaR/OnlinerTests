@@ -8,32 +8,23 @@ namespace Onliner.Pages
 {
     public class LaptopsPage: ProductsCatalogPage
     {
-        public const string MIN_FREQUENCY_DROP_DOWN_MENU = "(//span[text()='Частота матрицы']/parent::div/parent::div//select[@class='schema-filter-control__item'])[1]";
-        public const string MAX_FREQUENCY_DROP_DOWN_MENU = "(//span[text()='Частота матрицы']/parent::div/parent::div//select[@class='schema-filter-control__item'])[2]";
-        public const string LAPTOPS_PAGE_TITLE = "//h1[text()='Ноутбуки']";
-        public const string ELEMENT_CONTAINER = "//div[@class='js-schema-results schema-grid__center-column']";
+        private const string MIN_FREQUENCY_DROP_DOWN_MENU = "(//span[text()='Частота матрицы']/parent::div/parent::div//select[@class='schema-filter-control__item'])[1]";
+        private const string MAX_FREQUENCY_DROP_DOWN_MENU = "(//span[text()='Частота матрицы']/parent::div/parent::div//select[@class='schema-filter-control__item'])[2]";
+        private const string LAPTOPS_PAGE_TITLE = "//h1[text()='Ноутбуки']";
+        private const string ELEMENT_CONTAINER = "//div[@class='js-schema-results schema-grid__center-column']";
         
         public MyWebElement LaptopsPageTitle => new MyWebElement(By.XPath(LAPTOPS_PAGE_TITLE));
         public MyWebElement ElementsContainer => new MyWebElement(By.XPath(ELEMENT_CONTAINER));
         public SelectElement MinFrequencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(MIN_FREQUENCY_DROP_DOWN_MENU)));
         public SelectElement MaxFrequencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(MAX_FREQUENCY_DROP_DOWN_MENU)));
 
-        public void ChangeMinFrequency(string minFrequency)
-        {
-            MinFrequencyDropDownMenu.SelectByValue(minFrequency); 
-        }
+        public void ChangeMinFrequency(string minFrequency) => MinFrequencyDropDownMenu.SelectByValue(minFrequency);
 
-        public void ChangeMaxFrequency(string maxFrequency)
-        {
-            MaxFrequencyDropDownMenu.SelectByValue(maxFrequency);
-        }
+        public void ChangeMaxFrequency(string maxFrequency) => MaxFrequencyDropDownMenu.SelectByValue(maxFrequency);
 
-        public void ClickSuperPriceCheckBox()
-        {
-            SuperPrice.Click();
-        }
+        public void ClickSuperPriceCheckBox() => SuperPrice.Click();
 
-        public bool SuperPriceProductCount()
+        public bool AreAllProductsContainsSuperPriceBanner()
         {
             var wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
 
@@ -50,7 +41,7 @@ namespace Onliner.Pages
             return Products.Count == SuperPriceBanner.Count;
         }
 
-        public bool FilterContanerContais(string filterText)
+        public bool IsFilterContanerContaisFilter(string filterText)
         {
             MyWebElement FilterElemet = new MyWebElement(By.XPath($"//span[@class='schema-tags__text'][text()='{filterText}']"));
             return FilterElemet.IsPresent(); ;

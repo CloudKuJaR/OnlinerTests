@@ -6,13 +6,13 @@ namespace Onliner.Pages
     public class CatalogPage
     {
 
-        public const string TV = "//a[@href='https://catalog.onliner.by/tv']";
-        public const string ELECTRONICS = "//li[@data-id='1']";
-        public const string TV_AND_VIDEO = "//a[@href='https://catalog.onliner.by/tv']/../../..";
-        public const string ELECTRONICS_TEXT = "//span[text()='Электроника']";
-        public const string COMPUTER_AND_WEB = "//li[@data-id='2']";
-        public const string LAPTOPS_AND_COMPUTERS = "//div[text()=' Ноутбуки, компьютеры, мониторы ']";
-        public const string LAPTOPS = "//a[@href='https://catalog.onliner.by/notebook']";
+        private const string TV = "//a[@href='https://catalog.onliner.by/tv']";
+        private const string ELECTRONICS = "//li[@data-id='1']";
+        private const string TV_AND_VIDEO = "//a[@href='https://catalog.onliner.by/tv']/../../..";
+        private const string ELECTRONICS_TEXT = "//span[text()='Электроника']";
+        private const string COMPUTER_AND_WEB = "//li[@data-id='2']";
+        private const string LAPTOPS_AND_COMPUTERS = "//div[text()=' Ноутбуки, компьютеры, мониторы ']";
+        private const string LAPTOPS = "//a[@href='https://catalog.onliner.by/notebook']";
 
         public MyWebElement Tv => new MyWebElement(By.XPath(TV));
         public MyWebElement Electronics => new MyWebElement(By.XPath(ELECTRONICS));

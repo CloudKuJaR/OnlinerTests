@@ -1,6 +1,7 @@
 ﻿using Onliner.Utils;
 using Onliner.WebElementExtension;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,26 +12,59 @@ namespace Onliner.Pages
 {
     public class CurrencyConversionPage
     {
-        public string BUY_BUTTON = "//label[@for='buy']";
-        public string AMOUNT_CURRENCY_FIELD = "//input[@id='amount-in']";
+        private string BUY_BUTTON = "//label[@for='buy']";
+        private string AMOUNT_CURRENCY_FIELD = "//input[@id='amount-in']";
+        private string CURRENCY_DROP_DOWN_MENU = "//select[@id='currency-in']";
+        private string CONVERSION_RESULT = "//b[@class='js-cur-result']";
+        private string CONVERSION_RESULT_TYPE_OF_CURRENCY = "//li[@class='result to-be-removed']//span";
+        private string BANK_SELLING_PRICE = "(//table[@class='b-currency-table__best'])[2]//td[3]//b";
+        private string CURRENCY_CONVERTION_PAGE_TITLE = "//div[@class='b-currency-main__top']//h1";
+        private string DATE_CONTAINER = "//th[@class='th-first']";
+        private string TYPE_OF_CURRENCY = "//p[@class='abbr rate']//b[text()='{0}']";
 
         public MyWebElement BuyButton => new MyWebElement(By.XPath(BUY_BUTTON));
         public MyWebElement AmountCurrencyField => new MyWebElement(By.XPath(AMOUNT_CURRENCY_FIELD));
+        public MyWebElement ConversionResult => new MyWebElement(By.XPath(CONVERSION_RESULT));
+        public MyWebElement BankSellingPrice => new MyWebElement(By.XPath(BANK_SELLING_PRICE));
+        public MyWebElement ConversionResultTypeOfCurrency => new MyWebElement(By.XPath(CONVERSION_RESULT_TYPE_OF_CURRENCY));
+        public MyWebElement DataContainer => new MyWebElement(By.XPath(DATE_CONTAINER));
+        public MyWebElement CurrencyConversioPageTitle => new MyWebElement(By.XPath(CURRENCY_CONVERTION_PAGE_TITLE));
+        public SelectElement CurrencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(CURRENCY_DROP_DOWN_MENU)));
 
-        public void ClickBuyButton()
+        public void ClickBuyButton() => BuyButton.Click();
+
+        public string GetAmountCurrencyFieldValue() => AmountCurrencyField.GetAttribute("value");
+
+        public int GetRandomValue() => RandomHelper.GetRandomValue();
+
+        public void ChooseTypeOfCurrency(string CurrencyType) => CurrencyDropDownMenu.SelectByValue(CurrencyType);
+
+        public float GetBankSellingPrice() => float.Parse(BankSellingPrice.Text);
+
+        public bool IsCurrencyTypePresent(string currencyTypeText) => new MyWebElement(By.XPath(string.Format(TYPE_OF_CURRENCY, currencyTypeText))).IsPresent();
+
+        public string GetCurrecnyPageTitle() => CurrencyConversioPageTitle.Text;
+
+        public float ConvertConversionResultStringToFloat() => float.Parse(Page.CurrencyConversionPage.ConversionResult.Text);
+
+        public bool IsTheDateCorrect()
         {
-            BuyButton.Click();
+            string currentDate = DateHelper.GetTodaysDateAndMonth();
+            string dateFromOnliner = DataContainer.Text;
+
+            return currentDate == dateFromOnliner;
         }
 
-        public void FillAmountCurrencyField()
+        public void FillAmountCurrencyFieldWithInvalidData()
         {
             string randomString = RandomHelper.GetRandomString();
             AmountCurrencyField.SendKeys(randomString);
         }
 
-        public string GetAmountCurrencyFieldValue()
+        public void FillAmountCurrencyFieldWithValidData(string randomValue)
         {
-            return AmountCurrencyField.GetAttribute("value");
+            AmountCurrencyField.Clear();
+            AmountCurrencyField.SendKeys(randomValue);
         }
     }
 }

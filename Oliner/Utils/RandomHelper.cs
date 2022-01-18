@@ -15,5 +15,12 @@ namespace Onliner.Utils
             }
             return randomString;
         }
+
+        public static int GetRandomValue()
+        {
+            Random r = new Random();
+            int randomValue = r.Next(10,1000);
+            return randomValue;
+        }
     }
 }
