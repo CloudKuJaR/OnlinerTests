@@ -11,11 +11,11 @@ namespace Onliner.Pages
         private const string REGISTRATION_BUTTON = "//a[@href='https://profile.onliner.by/registration']";
         private const string AUTH_FORM_TITLE = "//div[contains(@class,'auth-form__title')]";
 
-        public MyWebElement UsernameField => new MyWebElement(By.XPath(USERNAME_FIELD));
-        public MyWebElement PasswordField => new MyWebElement(By.XPath(PASSWORD_FIELD));
-        public MyWebElement LoginButton => new MyWebElement(By.XPath(LOGIN_BUTTON));
-        public MyWebElement RegistrationButton => new MyWebElement(By.XPath(REGISTRATION_BUTTON));
         public MyWebElement AuthFormTitle => new MyWebElement(By.XPath(AUTH_FORM_TITLE));
+        private MyWebElement UsernameField => new MyWebElement(By.XPath(USERNAME_FIELD));
+        private MyWebElement PasswordField => new MyWebElement(By.XPath(PASSWORD_FIELD));
+        private MyWebElement LoginButton => new MyWebElement(By.XPath(LOGIN_BUTTON));
+        private MyWebElement RegistrationButton => new MyWebElement(By.XPath(REGISTRATION_BUTTON));
 
         public void OpenRegistrationPage() => RegistrationButton.Click();
 

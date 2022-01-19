@@ -14,13 +14,13 @@ namespace Onliner.Pages
         private const string LAPTOPS_AND_COMPUTERS = "//div[text()=' Ноутбуки, компьютеры, мониторы ']";
         private const string LAPTOPS = "//a[@href='https://catalog.onliner.by/notebook']";
 
-        public MyWebElement Tv => new MyWebElement(By.XPath(TV));
-        public MyWebElement Electronics => new MyWebElement(By.XPath(ELECTRONICS));
-        public MyWebElement TvAndVideo => new MyWebElement(By.XPath(TV_AND_VIDEO));
         public MyWebElement ElectronicsText => new MyWebElement(By.XPath(ELECTRONICS_TEXT));
-        public MyWebElement ComputerAndWeb => new MyWebElement(By.XPath(COMPUTER_AND_WEB));
-        public MyWebElement LaptopsAndComputers => new MyWebElement(By.XPath(LAPTOPS_AND_COMPUTERS));
-        public MyWebElement Laptops => new MyWebElement(By.XPath(LAPTOPS));
+        private MyWebElement Tv => new MyWebElement(By.XPath(TV));
+        private MyWebElement Electronics => new MyWebElement(By.XPath(ELECTRONICS));
+        private MyWebElement TvAndVideo => new MyWebElement(By.XPath(TV_AND_VIDEO));
+        private MyWebElement ComputerAndWeb => new MyWebElement(By.XPath(COMPUTER_AND_WEB));
+        private MyWebElement LaptopsAndComputers => new MyWebElement(By.XPath(LAPTOPS_AND_COMPUTERS));
+        private MyWebElement Laptops => new MyWebElement(By.XPath(LAPTOPS));
 
         public void NavigateToTvPage()
         {

@@ -22,14 +22,14 @@ namespace Onliner.Pages
         private string DATE_CONTAINER = "//th[@class='th-first']";
         private string TYPE_OF_CURRENCY = "//p[@class='abbr rate']//b[text()='{0}']";
 
-        public MyWebElement BuyButton => new MyWebElement(By.XPath(BUY_BUTTON));
-        public MyWebElement AmountCurrencyField => new MyWebElement(By.XPath(AMOUNT_CURRENCY_FIELD));
-        public MyWebElement ConversionResult => new MyWebElement(By.XPath(CONVERSION_RESULT));
-        public MyWebElement BankSellingPrice => new MyWebElement(By.XPath(BANK_SELLING_PRICE));
         public MyWebElement ConversionResultTypeOfCurrency => new MyWebElement(By.XPath(CONVERSION_RESULT_TYPE_OF_CURRENCY));
-        public MyWebElement DataContainer => new MyWebElement(By.XPath(DATE_CONTAINER));
-        public MyWebElement CurrencyConversioPageTitle => new MyWebElement(By.XPath(CURRENCY_CONVERTION_PAGE_TITLE));
-        public SelectElement CurrencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(CURRENCY_DROP_DOWN_MENU)));
+        private MyWebElement BuyButton => new MyWebElement(By.XPath(BUY_BUTTON));
+        private MyWebElement AmountCurrencyField => new MyWebElement(By.XPath(AMOUNT_CURRENCY_FIELD));
+        private MyWebElement ConversionResult => new MyWebElement(By.XPath(CONVERSION_RESULT));
+        private MyWebElement BankSellingPrice => new MyWebElement(By.XPath(BANK_SELLING_PRICE));
+        private MyWebElement DataContainer => new MyWebElement(By.XPath(DATE_CONTAINER));
+        private MyWebElement CurrencyConversioPageTitle => new MyWebElement(By.XPath(CURRENCY_CONVERTION_PAGE_TITLE));
+        private SelectElement CurrencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(CURRENCY_DROP_DOWN_MENU)));
 
         public void ClickBuyButton() => BuyButton.Click();
 

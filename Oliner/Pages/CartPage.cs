@@ -10,14 +10,14 @@ namespace Onliner.Pages
         private const string HOME_PAGE_BUTTON = "//a[@href='https://www.onliner.by']";
         private const string TV_NAME = "//div[@class='cart-form__description cart-form__description_primary cart-form__description_base-alter cart-form__description_font-weight_semibold cart-form__description_condensed-other']//a";
         private const string QUANTITY_OF_PRODUCT = "//div[@class='cart-form__description cart-form__description_base cart-form__description_ellipsis cart-form__description_condensed-other']";
-        private const string PRODUCT_PRICE = "//div[@class='cart-form__description cart-form__description_primary cart-form__description_base-alter cart-form__description_font-weight_semibold cart-form__description_ellipsis cart-form__description_condensed-other']//span"; 
+        private const string PRODUCT_PRICE = "//div[@class='cart-form__description cart-form__description_primary cart-form__description_base-alter cart-form__description_font-weight_semibold cart-form__description_ellipsis cart-form__description_condensed-other']//span";
 
-        public MyWebElement OrderButton => new MyWebElement(By.XPath(ORDER_BUTTON));
-        public MyWebElement DeleteButton => new MyWebElement(By.XPath(DELETE_BUTTON));
-        public MyWebElement HomePageButton => new MyWebElement(By.XPath(HOME_PAGE_BUTTON));
         public MyWebElement TvName => new MyWebElement(By.XPath(TV_NAME));
         public MyWebElement QuantityOfProduct => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCT));
-        public MyWebElement ProductPrice => new MyWebElement(By.XPath(PRODUCT_PRICE));
+        private MyWebElement ProductPrice => new MyWebElement(By.XPath(PRODUCT_PRICE));
+        private MyWebElement OrderButton => new MyWebElement(By.XPath(ORDER_BUTTON));
+        private MyWebElement DeleteButton => new MyWebElement(By.XPath(DELETE_BUTTON));
+        private MyWebElement HomePageButton => new MyWebElement(By.XPath(HOME_PAGE_BUTTON));
 
         public void OpenOrderPageButton() => OrderButton.Click();
 
@@ -25,7 +25,7 @@ namespace Onliner.Pages
 
         public string GetProductPrice() => ProductPrice.Text;
 
-        public void ClickToDeleteButton()
+        public void ClickDeleteButton()
         {
             DeleteButton.HoverOver();
             DeleteButton.Click();

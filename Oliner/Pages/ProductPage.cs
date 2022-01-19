@@ -13,13 +13,13 @@ namespace Onliner.Pages
         private const string CONFIRM_CITY_BUTTON = "//span[@class='button-style button-style_another button-style_base offers-form__button']";
         private const string PRODUCT_NAME = "//h1[@class='catalog-masthead__title']";
 
-        public MyWebElement SellersOffers => new MyWebElement(By.XPath(SELLERS_OFFERS));
-        public MyWebElement Seller => new MyWebElement(By.XPath(SELLER));
-        public MyWebElement Cart => new MyWebElement(By.XPath(CART));
-        public MyWebElement ComparisonButton => new MyWebElement(By.XPath(COMPARISON_BUTTON));
-        public MyWebElement TvCatalogButton => new MyWebElement(By.XPath(TV_CATALOG_BUTTON));
-        public MyWebElement ConfirmCityButton => new MyWebElement(By.XPath(CONFIRM_CITY_BUTTON));
-        public MyWebElement ProductName => new MyWebElement(By.XPath(PRODUCT_NAME));
+        private MyWebElement SellersOffers => new MyWebElement(By.XPath(SELLERS_OFFERS));
+        private MyWebElement Seller => new MyWebElement(By.XPath(SELLER));
+        private MyWebElement Cart => new MyWebElement(By.XPath(CART));
+        private MyWebElement ComparisonButton => new MyWebElement(By.XPath(COMPARISON_BUTTON));
+        private MyWebElement TvCatalogButton => new MyWebElement(By.XPath(TV_CATALOG_BUTTON));
+        private MyWebElement ConfirmCityButton => new MyWebElement(By.XPath(CONFIRM_CITY_BUTTON));
+        private MyWebElement ProductName => new MyWebElement(By.XPath(PRODUCT_NAME));
 
         public void ClickSellersOffersButton() => SellersOffers.Click();
 

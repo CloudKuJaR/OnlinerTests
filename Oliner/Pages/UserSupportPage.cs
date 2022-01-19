@@ -17,18 +17,17 @@ namespace Onliner.Pages
         private const string CAPTCHA_FIELD = "//input[@id='id_captcha']";
         private const string CAPTCHA_IMG = "//img[@class='captcha']";
         private const string ADD_BUTTON = "//input[@type='image']";
-
+        public MyWebElement EmailFieldError => new MyWebElement(By.XPath(EMAIL_FIELD_ERROR));
         public MyWebElement UserSupportPageTitle => new MyWebElement(By.XPath(USER_SUPPORT_PAGE_TITLE));
         public MyWebElement UserNameField => new MyWebElement(By.XPath(USER_NAME_FIELD));
-        public MyWebElement EmailField => new MyWebElement(By.XPath(EMAIL_FIELD));
-        public MyWebElement EmailFieldError => new MyWebElement(By.XPath(EMAIL_FIELD_ERROR));
-        public MyWebElement ShortDiscription => new MyWebElement(By.XPath(SHORT_DISCRIPTON));
-        public MyWebElement DetailedDiscription => new MyWebElement(By.XPath(DETAILED_DISCRIPTON));
-        public MyWebElement CaptchaField => new MyWebElement(By.XPath(CAPTCHA_FIELD));
-        public MyWebElement CaptchaImg => new MyWebElement(By.XPath(CAPTCHA_IMG));
-        public MyWebElement AddButton => new MyWebElement(By.XPath(ADD_BUTTON));
-        public SelectElement DropDownMenuTypeOfProblem => new SelectElement(Driver.driver.FindElement(By.XPath(DROP_DOWN_MENU_TYPE_OF_PROBLEM)));
-        public SelectElement DropDownMenuWhere => new SelectElement(Driver.driver.FindElement(By.XPath(DROP_DOWN_MENU_WHERE)));
+        private MyWebElement EmailField => new MyWebElement(By.XPath(EMAIL_FIELD));
+        private MyWebElement ShortDiscription => new MyWebElement(By.XPath(SHORT_DISCRIPTON));
+        private MyWebElement DetailedDiscription => new MyWebElement(By.XPath(DETAILED_DISCRIPTON));
+        private MyWebElement CaptchaField => new MyWebElement(By.XPath(CAPTCHA_FIELD));
+        private MyWebElement CaptchaImg => new MyWebElement(By.XPath(CAPTCHA_IMG));
+        private MyWebElement AddButton => new MyWebElement(By.XPath(ADD_BUTTON));
+        private SelectElement DropDownMenuTypeOfProblem => new SelectElement(Driver.driver.FindElement(By.XPath(DROP_DOWN_MENU_TYPE_OF_PROBLEM)));
+        private SelectElement DropDownMenuWhere => new SelectElement(Driver.driver.FindElement(By.XPath(DROP_DOWN_MENU_WHERE)));
 
         public void FillUserNameField() => UserNameField.SendKeys("Colombus");
 

@@ -30,12 +30,12 @@ namespace Onliner.Pages
 
             wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']")).Count != 0);
 
-            //Thread.Sleep(1000);
+            
             var Products = ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']"));
 
             wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']")).Count != 0);
 
-            //Thread.Sleep(1000);
+            
             var SuperPriceBanner = ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']"));
 
             return Products.Count == SuperPriceBanner.Count;

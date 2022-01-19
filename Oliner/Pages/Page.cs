@@ -80,5 +80,10 @@ namespace Onliner.Pages
         {
             get { return GetPage<CurrencyConversionPage>(); }
         }
+
+        public static HousesAndFlatsPage HousesAndFlatsPage
+        {
+            get { return GetPage<HousesAndFlatsPage>(); }
+        }
     }
 }

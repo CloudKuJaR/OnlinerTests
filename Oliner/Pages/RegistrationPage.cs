@@ -20,11 +20,6 @@ namespace Onliner.Pages
         private const string REGESTRATION_CONFIRMATION_TITLE = "//div[@class='auth-form__title auth-form__title_big auth-form__title_condensed-default']";
         private const string GO_TO_MAIL_BUTTON = "//a[contains(@class,'auth-button_appendant')]";
 
-        public MyWebElement EmailField => new MyWebElement(By.XPath(EMAIL_FIELD));
-        public MyWebElement PasswordField => new MyWebElement(By.XPath(PASSWORD_FIELD));
-        public MyWebElement RepeatPasswordField => new MyWebElement(By.XPath(REPEAT_PASSWORD_FIELD));
-        public MyWebElement CheckBox => new MyWebElement(By.XPath(ACCEPT_PRIVACY_CHECK_BOX));
-        public MyWebElement RegisrationButton => new MyWebElement(By.XPath(REGISRATION_BUTTON));
         public MyWebElement RegistrationFormTitle => new MyWebElement(By.XPath(REGISTRATION_FORM_TITLE));
         public MyWebElement EmailFieldHightLightedAndGreen => new MyWebElement(By.XPath(EMAIL_FIELD_HIGHTLIGHTED_AND_GREEN));
         public MyWebElement PasswordFieldHightLightedAndRed => new MyWebElement(By.XPath(PASSWORD_FIELD_HIGTLIGHTED_AND_RED));
@@ -32,6 +27,11 @@ namespace Onliner.Pages
         public MyWebElement PasswordDescription => new MyWebElement(By.XPath(PASSWORD_DESCRIPTION));
         public MyWebElement RegestrationConfirmationTitle => new MyWebElement(By.XPath(REGESTRATION_CONFIRMATION_TITLE));
         public MyWebElement GoToMailButton => new MyWebElement(By.XPath(GO_TO_MAIL_BUTTON));
+        private MyWebElement EmailField => new MyWebElement(By.XPath(EMAIL_FIELD));
+        private MyWebElement PasswordField => new MyWebElement(By.XPath(PASSWORD_FIELD));
+        private MyWebElement RepeatPasswordField => new MyWebElement(By.XPath(REPEAT_PASSWORD_FIELD));
+        private MyWebElement AcceptPrivacyCheckBox => new MyWebElement(By.XPath(ACCEPT_PRIVACY_CHECK_BOX));
+        private MyWebElement RegisrationButton => new MyWebElement(By.XPath(REGISRATION_BUTTON));
 
         public void ClickRegistrationButton() => RegisrationButton.Click();
 
@@ -49,8 +49,8 @@ namespace Onliner.Pages
 
         public void ClickCheckBox()
         {
-            CheckBox.WaitForElementIsDisplayed();
-            CheckBox.Click();
+            AcceptPrivacyCheckBox.WaitForElementIsDisplayed();
+            AcceptPrivacyCheckBox.Click();
         }
     }
 }

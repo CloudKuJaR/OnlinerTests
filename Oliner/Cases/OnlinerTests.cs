@@ -1,6 +1,8 @@
 ﻿using AventStack.ExtentReports;
 using NUnit.Framework;
 using Onliner.Pages;
+using Onliner.WebDriverExtension;
+using OpenQA.Selenium;
 using System;
 
 namespace Onliner.Cases
@@ -25,6 +27,14 @@ namespace Onliner.Cases
         private string currencyTypeTextForEUR = "1 EUR";
         private string currencyTypeTextForRUB = "100 RUB";
         private string currencyConversionPageTitle = "Лучшие курсы валют";
+        private string cityName = "Минск";
+        private string numberOfRooms = "2";
+        private string flatPriceTo = "500";
+        private string subwayDropDownMemuOption = "Возле метро";
+        private string sortByDropDownMenuOption = "Сначала дорогие";
+        private string housesAndFlatsPageTitle = "Снять квартиру, аренда жилья в Минске";
+
+        private static IWebDriver WebDriver => Driver.driver;
 
         [OneTimeSetUp]
         public void InitializeComponent()
@@ -113,17 +123,17 @@ namespace Onliner.Cases
             Page.Menu.OpenCatalogButton();
             Page.CatalogPage.NavigateToLaptopPage();
             Assert.AreEqual(Page.LaptopsPage.LaptopsPageTitle.Text, laptopsPageTitle);
-            int firstValue = Page.LaptopsPage.GetQuantityOfProducts();
+            //int firstValue = Page.LaptopsPage.GetQuantityOfProducts();
             Page.LaptopsPage.ClickManufactureContainerButton();
             Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
             Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(nameOfManufacturerInFilterContainer));
-            int secondValue = Page.LaptopsPage.GetQuantityOfProducts();
-            Assert.IsTrue(Page.LaptopsPage.ComparingTheQuantityOfProducts(firstValue, secondValue));
+            //int secondValue = Page.LaptopsPage.GetQuantityOfProducts();
+            //Assert.IsTrue(Page.LaptopsPage.ComparingTheQuantityOfProducts(firstValue, secondValue));
             Page.LaptopsPage.ChangeMinFrequency(minFrequency);
             Page.LaptopsPage.ChangeMaxFrequency(maxFrequency);
-            
+
             Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(frequencyInFilterContainer));
-            
+
             Page.LaptopsPage.ClickSuperPriceCheckBox();
             Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(superPriceInFilterContainer));
             Assert.IsTrue(Page.LaptopsPage.AreAllProductsContainsSuperPriceBanner());
@@ -202,7 +212,7 @@ namespace Onliner.Cases
             string firstAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
             Page.CurrencyConversionPage.FillAmountCurrencyFieldWithInvalidData();
             string secondAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
-            Assert.AreEqual(firstAmountCurrencyFieldValue,secondAmountCurrencyFieldValue);
+            Assert.AreEqual(firstAmountCurrencyFieldValue, secondAmountCurrencyFieldValue);
             int randomValue = Page.CurrencyConversionPage.GetRandomValue();
             Page.CurrencyConversionPage.FillAmountCurrencyFieldWithValidData(randomValue.ToString());
             Page.CurrencyConversionPage.ChooseTypeOfCurrency(eur);
@@ -215,7 +225,36 @@ namespace Onliner.Cases
         [Test]
         public void RealtyPageTest()
         {
-
+            Page.HomePage.OpenHousesAndFlatsPage();
+            Page.HousesAndFlatsPage.ClickRentButton();
+            Page.HousesAndFlatsPage.ClickCityAndAddressDropDownMenu();
+            Page.HousesAndFlatsPage.ChooseCity(cityName);
+            int firstResultsValue = Page.HousesAndFlatsPage.GetQuantityOfFlats();
+            Assert.AreEqual(Page.HousesAndFlatsPage.GetPageTitle(), housesAndFlatsPageTitle);
+            Assert.IsTrue(Page.HousesAndFlatsPage.Map.IsPresent());
+            Page.HousesAndFlatsPage.ClickFilterFlatButton();
+            Page.HousesAndFlatsPage.WaitForQuantityOfFlatsChanged(firstResultsValue);
+            int secondResultValue = Page.HousesAndFlatsPage.GetQuantityOfFlats();
+            Assert.IsTrue(firstResultsValue > secondResultValue);
+            Assert.IsTrue(Page.HousesAndFlatsPage.IsFlatContainsOnlyNumberOfRooms());
+            Page.HousesAndFlatsPage.ChooseNumberOfRooms(numberOfRooms);
+            Page.HousesAndFlatsPage.WaitForQuantityOfFlatsChanged(secondResultValue);
+            int thirdResultValue = Page.HousesAndFlatsPage.GetQuantityOfFlats();
+            Assert.IsTrue(secondResultValue > thirdResultValue);
+            Assert.IsTrue(Page.HousesAndFlatsPage.IsFlatContainsOnlyTwoRoomsFlat());
+            Page.HousesAndFlatsPage.FillFilterPriceToField(flatPriceTo);
+            Page.HousesAndFlatsPage.WaitForQuantityOfFlatsChanged(thirdResultValue);
+            Assert.IsTrue(Page.HousesAndFlatsPage.IsFlatContainsPriceLessThan());
+            Page.HousesAndFlatsPage.ClickSubWayDropDownMenu();
+            Page.HousesAndFlatsPage.ChooseSubWayDropDownMenuOption(subwayDropDownMemuOption);
+            Page.HousesAndFlatsPage.WaitForQuantityOfFlatsChanged(thirdResultValue);
+            int fourthResultValue = Page.HousesAndFlatsPage.GetQuantityOfFlats();
+            Assert.IsTrue(thirdResultValue > fourthResultValue);
+            string firstStreetNameOfTheFirstFlat = Page.HousesAndFlatsPage.GetStreetNameOfTheFirstFlat();
+            Page.HousesAndFlatsPage.ClickFilterSortByDropDownMenu();
+            Page.HousesAndFlatsPage.ChooseFilterSortByDropDownMenuOption(sortByDropDownMenuOption);
+            WebDriver.GetWait().Until(drv => firstStreetNameOfTheFirstFlat != Page.HousesAndFlatsPage.GetStreetNameOfTheFirstFlat());
+            Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
         [TearDown]
@@ -223,13 +262,13 @@ namespace Onliner.Cases
         {
             if (Page.OrderPage.OrderText.IsPresent() == true)
             {
-                Page.OrderPage.OpenCatalogButton();
+                Page.OrderPage.OpenCatalogPage();
             }
 
             if (Page.Menu.CartBanner.IsPresent() == true)
             {
                 Page.Menu.OpenCartPage();
-                Page.CartPage.ClickToDeleteButton();
+                Page.CartPage.ClickDeleteButton();
                 Page.CartPage.OpenHomePageButton();
                 Console.WriteLine("Очистка Корзины удалась");
             }

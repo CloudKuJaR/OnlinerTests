@@ -32,9 +32,7 @@ namespace Onliner
             Reporter.htmlReporter.Config.DocumentTitle = "Test Report";
             Reporter.htmlReporter.Config.ReportName = " Artem ";
             Reporter.extent = new ExtentReports();
-
             Reporter.extent.AttachReporter(Reporter.htmlReporter);
         }
-
     }
 }
