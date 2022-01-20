@@ -22,7 +22,7 @@ namespace Onliner.Pages
         private const string QUANTITY_OF_FLATS_CONTAINER = "//div[@class='classifieds-bar__item']";
         private const string STREET_NAME_OF_THE_FIRST_FLAT = "(//span[@class='classified__caption-item classified__caption-item_adress'])[1]";
 
-        public MyWebElement Map => new MyWebElement(By.XPath(MAP));
+        private MyWebElement Map => new MyWebElement(By.XPath(MAP));
         private MyWebElement RentButton => new MyWebElement(By.XPath(RENT_BUTTON));
         private MyWebElement CityAndAddressDropDownMenu => new MyWebElement(By.XPath(CITY_AND_ADDRESS_DROP_DOWN_MENU));
         private MyWebElement FilterFlatButton => new MyWebElement(By.XPath(FILTER_FLAT_BUTTON));
@@ -52,6 +52,8 @@ namespace Onliner.Pages
         public string GetPageTitle() => Driver.driver.Title;
 
         public void WaitForQuantityOfFlatsChanged(int quantity) => Driver.driver.GetWait().Until(drv => int.Parse(string.Join("", QuantityOfFlatsContainer.Text.Where(c => char.IsDigit(c)))) != quantity);
+
+        public bool IsMapPresent() => Map.IsPresent();
 
         public string GetStreetNameOfTheFirstFlat()
         {

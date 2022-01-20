@@ -16,9 +16,9 @@ namespace Onliner.Pages
         private const string MANUFACTURER_LOCATOR = "(//div[@class='schema-filter-popover__inner'])[2]//input[@value='{0}']/..";
 
         public MyWebElement SuperPrice => new MyWebElement(By.XPath(SUPER_PRICE));
-        public MyWebElement ProductsContainer => new MyWebElement(By.XPath(PRODUCTS_CONTAINER));
-        public MyWebElement ManufacturerContainerDropDownMenu => new MyWebElement(By.XPath(MANUFACTURER_CONTAINER_DROP_DOWN_MENU));
-        public MyWebElement QuantityOfProducts => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCTS));
+        private MyWebElement ProductsContainer => new MyWebElement(By.XPath(PRODUCTS_CONTAINER));
+        private MyWebElement ManufacturerContainerDropDownMenu => new MyWebElement(By.XPath(MANUFACTURER_CONTAINER_DROP_DOWN_MENU));
+        private MyWebElement QuantityOfProducts => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCTS));
 
         public void ChooseManufacturer(string ManufacturerName) => new MyWebElement(By.XPath(string.Format(MANUFACTURER_LOCATOR, ManufacturerName))).Click();
 

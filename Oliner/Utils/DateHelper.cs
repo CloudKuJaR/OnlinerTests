@@ -4,12 +4,18 @@ namespace Onliner.Utils
 {
     public static class DateHelper
     {
-        public static string GetTodaysDateAndMonth()
+        public static int GetTodaysDate()
         {
-            string currentDate = DateTime.Now.Date.ToLongDateString();
-            string dateAndMounth = currentDate.Remove(9);
+            int currentDate = DateTime.Today.Day;
+            
+            return currentDate;
+        }
 
-            return dateAndMounth;
+        public static string GetCurrentMonth()
+        {
+            int currentMonth = DateTime.Today.Month;
+
+            return Month.Months[currentMonth];
         }
     }
 }

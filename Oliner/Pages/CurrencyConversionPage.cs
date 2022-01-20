@@ -44,10 +44,11 @@ namespace Onliner.Pages
 
         public bool IsTheDateCorrect()
         {
-            string currentDate = DateHelper.GetTodaysDateAndMonth();
+            int currentDate = DateHelper.GetTodaysDate();
+            string currentMonth = DateHelper.GetCurrentMonth(); 
             string dateFromOnliner = DataContainer.Text;
 
-            return currentDate == dateFromOnliner;
+            return dateFromOnliner.Contains(currentDate.ToString()) && dateFromOnliner.Contains(currentMonth);
         }
 
         public void FillAmountCurrencyFieldWithInvalidData()

@@ -12,8 +12,8 @@ namespace Onliner.Pages
         private const string QUANTITY_OF_PRODUCT = "//div[@class='cart-form__description cart-form__description_base cart-form__description_ellipsis cart-form__description_condensed-other']";
         private const string PRODUCT_PRICE = "//div[@class='cart-form__description cart-form__description_primary cart-form__description_base-alter cart-form__description_font-weight_semibold cart-form__description_ellipsis cart-form__description_condensed-other']//span";
 
-        public MyWebElement TvName => new MyWebElement(By.XPath(TV_NAME));
-        public MyWebElement QuantityOfProduct => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCT));
+        private MyWebElement TvName => new MyWebElement(By.XPath(TV_NAME));
+        private MyWebElement QuantityOfProduct => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCT));
         private MyWebElement ProductPrice => new MyWebElement(By.XPath(PRODUCT_PRICE));
         private MyWebElement OrderButton => new MyWebElement(By.XPath(ORDER_BUTTON));
         private MyWebElement DeleteButton => new MyWebElement(By.XPath(DELETE_BUTTON));
@@ -24,6 +24,20 @@ namespace Onliner.Pages
         public void OpenHomePageButton() => HomePageButton.Click();
 
         public string GetProductPrice() => ProductPrice.Text;
+
+        public string GetTvNameText()
+        {
+            TvName.WaitForElementIsDisplayed();
+
+            return TvName.Text;
+        }
+
+        public string GetQuantityOfProductText()
+        {
+            QuantityOfProduct.WaitForElementIsDisplayed();
+
+            return QuantityOfProduct.Text;
+        }
 
         public void ClickDeleteButton()
         {

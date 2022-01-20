@@ -12,16 +12,18 @@ namespace Onliner.Pages
         private const string LAPTOPS_PAGE_TITLE = "//h1[text()='Ноутбуки']";
         private const string ELEMENT_CONTAINER = "//div[@class='js-schema-results schema-grid__center-column']";
 
-        public MyWebElement LaptopsPageTitle => new MyWebElement(By.XPath(LAPTOPS_PAGE_TITLE));
-        public MyWebElement ElementsContainer => new MyWebElement(By.XPath(ELEMENT_CONTAINER));
-        public SelectElement MinFrequencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(MIN_FREQUENCY_DROP_DOWN_MENU)));
-        public SelectElement MaxFrequencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(MAX_FREQUENCY_DROP_DOWN_MENU)));
+        private MyWebElement LaptopsPageTitle => new MyWebElement(By.XPath(LAPTOPS_PAGE_TITLE));
+        private MyWebElement ElementsContainer => new MyWebElement(By.XPath(ELEMENT_CONTAINER));
+        private SelectElement MinFrequencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(MIN_FREQUENCY_DROP_DOWN_MENU)));
+        private SelectElement MaxFrequencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(MAX_FREQUENCY_DROP_DOWN_MENU)));
 
         public void ChangeMinFrequency(string minFrequency) => MinFrequencyDropDownMenu.SelectByValue(minFrequency);
 
         public void ChangeMaxFrequency(string maxFrequency) => MaxFrequencyDropDownMenu.SelectByValue(maxFrequency);
 
         public void ClickSuperPriceCheckBox() => SuperPrice.Click();
+
+        public string GetLaptopsPageTitleText() => LaptopsPageTitle.Text;
 
         public bool AreAllProductsContainsSuperPriceBanner()
         {

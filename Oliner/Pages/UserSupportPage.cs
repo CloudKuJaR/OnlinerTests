@@ -17,9 +17,10 @@ namespace Onliner.Pages
         private const string CAPTCHA_FIELD = "//input[@id='id_captcha']";
         private const string CAPTCHA_IMG = "//img[@class='captcha']";
         private const string ADD_BUTTON = "//input[@type='image']";
-        public MyWebElement EmailFieldError => new MyWebElement(By.XPath(EMAIL_FIELD_ERROR));
-        public MyWebElement UserSupportPageTitle => new MyWebElement(By.XPath(USER_SUPPORT_PAGE_TITLE));
-        public MyWebElement UserNameField => new MyWebElement(By.XPath(USER_NAME_FIELD));
+
+        private MyWebElement EmailFieldError => new MyWebElement(By.XPath(EMAIL_FIELD_ERROR));
+        private MyWebElement UserSupportPageTitle => new MyWebElement(By.XPath(USER_SUPPORT_PAGE_TITLE));
+        private MyWebElement UserNameField => new MyWebElement(By.XPath(USER_NAME_FIELD));
         private MyWebElement EmailField => new MyWebElement(By.XPath(EMAIL_FIELD));
         private MyWebElement ShortDiscription => new MyWebElement(By.XPath(SHORT_DISCRIPTON));
         private MyWebElement DetailedDiscription => new MyWebElement(By.XPath(DETAILED_DISCRIPTON));
@@ -29,6 +30,14 @@ namespace Onliner.Pages
         private SelectElement DropDownMenuTypeOfProblem => new SelectElement(Driver.driver.FindElement(By.XPath(DROP_DOWN_MENU_TYPE_OF_PROBLEM)));
         private SelectElement DropDownMenuWhere => new SelectElement(Driver.driver.FindElement(By.XPath(DROP_DOWN_MENU_WHERE)));
 
+        public bool IsUserSupportPageTitlePresent() => UserSupportPageTitle.IsPresent();
+
+        public string GetUserNameFieldAttribute() => UserNameField.GetAttribute("value");
+
+        public bool IsEmailFieldErrorPresent() => EmailFieldError.IsPresent();
+
+        public bool IsEmailFieldErrorRemoved() => EmailFieldError.IsRemoved();
+
         public void FillUserNameField() => UserNameField.SendKeys("Colombus");
 
         public void ClearUserNameField() => UserNameField.Clear();
@@ -36,14 +45,6 @@ namespace Onliner.Pages
         public void FillEmailFieldWithInvalidCredentials() => EmailField.SendKeys("asd" + Keys.Tab);
 
         public void FillEmailFieldWithValidCredentials() => EmailField.SendKeys("sus@amogus.com" + Keys.Tab);
-
-        public bool DropDownMenusOptionsCount()
-        {
-            var typeOfProblemOptionsCount = DropDownMenuTypeOfProblem.Options;
-            var whereOptionsCount = DropDownMenuWhere.Options;
-
-            return typeOfProblemOptionsCount.Count > 1 | whereOptionsCount.Count > 1;
-        }
 
         public bool IsShortDiscriptionsPresent() => ShortDiscription.IsPresent();
 
@@ -56,5 +57,13 @@ namespace Onliner.Pages
         public bool IsAddButtonPresent() => AddButton.IsPresent();
 
         public bool IsAddButtonEnable() => AddButton.Enabled;
+
+        public bool DropDownMenusOptionsCount()
+        {
+            var typeOfProblemOptionsCount = DropDownMenuTypeOfProblem.Options;
+            var whereOptionsCount = DropDownMenuWhere.Options;
+
+            return typeOfProblemOptionsCount.Count > 1 | whereOptionsCount.Count > 1;
+        }
     }
 }

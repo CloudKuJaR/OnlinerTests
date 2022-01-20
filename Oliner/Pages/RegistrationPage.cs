@@ -19,13 +19,13 @@ namespace Onliner.Pages
         private const string REGESTRATION_CONFIRMATION_TITLE = "//div[@class='auth-form__title auth-form__title_big auth-form__title_condensed-default']";
         private const string GO_TO_MAIL_BUTTON = "//a[contains(@class,'auth-button_appendant')]";
 
-        public MyWebElement RegistrationFormTitle => new MyWebElement(By.XPath(REGISTRATION_FORM_TITLE));
-        public MyWebElement EmailFieldHightLightedAndGreen => new MyWebElement(By.XPath(EMAIL_FIELD_HIGHTLIGHTED_AND_GREEN));
-        public MyWebElement PasswordFieldHightLightedAndRed => new MyWebElement(By.XPath(PASSWORD_FIELD_HIGTLIGHTED_AND_RED));
-        public MyWebElement PasswordDescriptionError => new MyWebElement(By.XPath(PASSWORD_DESCRIPTION_ERROR));
-        public MyWebElement PasswordDescription => new MyWebElement(By.XPath(PASSWORD_DESCRIPTION));
-        public MyWebElement RegestrationConfirmationTitle => new MyWebElement(By.XPath(REGESTRATION_CONFIRMATION_TITLE));
-        public MyWebElement GoToMailButton => new MyWebElement(By.XPath(GO_TO_MAIL_BUTTON));
+        private MyWebElement RegistrationFormTitle => new MyWebElement(By.XPath(REGISTRATION_FORM_TITLE));
+        private MyWebElement EmailFieldHightLightedAndGreen => new MyWebElement(By.XPath(EMAIL_FIELD_HIGHTLIGHTED_AND_GREEN));
+        private MyWebElement PasswordFieldHightLightedAndRed => new MyWebElement(By.XPath(PASSWORD_FIELD_HIGTLIGHTED_AND_RED));
+        private MyWebElement PasswordDescriptionError => new MyWebElement(By.XPath(PASSWORD_DESCRIPTION_ERROR));
+        private MyWebElement PasswordDescription => new MyWebElement(By.XPath(PASSWORD_DESCRIPTION));
+        private MyWebElement RegestrationConfirmationTitle => new MyWebElement(By.XPath(REGESTRATION_CONFIRMATION_TITLE));
+        private MyWebElement GoToMailButton => new MyWebElement(By.XPath(GO_TO_MAIL_BUTTON));
         private MyWebElement EmailField => new MyWebElement(By.XPath(EMAIL_FIELD));
         private MyWebElement PasswordField => new MyWebElement(By.XPath(PASSWORD_FIELD));
         private MyWebElement RepeatPasswordField => new MyWebElement(By.XPath(REPEAT_PASSWORD_FIELD));
@@ -33,6 +33,20 @@ namespace Onliner.Pages
         private MyWebElement RegisrationButton => new MyWebElement(By.XPath(REGISRATION_BUTTON));
 
         public void ClickRegistrationButton() => RegisrationButton.Click();
+
+        public bool IsEmailFieldHightLightedAndGreenPresent() => EmailFieldHightLightedAndGreen.IsPresent();
+
+        public bool IsPasswordFieldHightLightedAndRedPresent() => PasswordFieldHightLightedAndRed.IsPresent();
+
+        public bool IsPasswordDescriptionErrorPresent() => PasswordDescriptionError.IsPresent();
+
+        public bool IsRegistrationFormTitlePresent() => RegistrationFormTitle.IsPresent();
+
+        public string GetPasswordDescriptionText() => PasswordDescription.Text;
+
+        public bool IsRegestrationConfirmationTitlePresent() => RegestrationConfirmationTitle.IsPresent();
+
+        public bool IsGoToMailButtonPresent() => GoToMailButton.IsPresent();
 
         public void FillEmailField()
         {

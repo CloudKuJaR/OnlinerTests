@@ -16,10 +16,10 @@ namespace Onliner.Pages
         private const string ACC_NAME = "//*[@class='b-top-profile__name']//*[contains(@href,'https://profile.onliner.by')]";
         private const string COMPARE_TEXT = "//*[@class='compare-button__sub compare-button__sub_main']//span";
 
-        public MyWebElement UserMenu => new MyWebElement(By.XPath(USER_MENU));
-        public MyWebElement CartBanner => new MyWebElement(By.XPath(CART_BANNER));
-        public MyWebElement AccName => new MyWebElement(By.XPath(ACC_NAME));
-        public MyWebElement CompareText => new MyWebElement(By.XPath(COMPARE_TEXT));
+        private MyWebElement UserMenu => new MyWebElement(By.XPath(USER_MENU));
+        private MyWebElement CartBanner => new MyWebElement(By.XPath(CART_BANNER));
+        private MyWebElement AccName => new MyWebElement(By.XPath(ACC_NAME));
+        private MyWebElement CompareText => new MyWebElement(By.XPath(COMPARE_TEXT));
         private MyWebElement CompareButton => new MyWebElement(By.XPath(COMPARE_BUTTON));
         private MyWebElement CatalogButton => new MyWebElement(By.XPath(CATALOG_BUTTON));
         private MyWebElement SearchBar => new MyWebElement(By.XPath(SEARCH_BAR));
@@ -39,6 +39,14 @@ namespace Onliner.Pages
         public void ClickLogOutButton() => LogOutButton.Click();
 
         public void OpenCartPage() => CartButton.Click();
+
+        public bool IsUserMenuPresent() => UserMenu.IsPresent();
+
+        public bool IsCartBannerPresent() => CartBanner.IsPresent();
+
+        public string GetAccNameText() => AccName.Text;
+
+        public string GetCompareText() => CompareText.Text;
 
         public void OpenCatalogButton()
         {
