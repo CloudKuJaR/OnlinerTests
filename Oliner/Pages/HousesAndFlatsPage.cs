@@ -1,8 +1,6 @@
 ﻿using Onliner.WebDriverExtension;
 using Onliner.WebElementExtension;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
 using System.Linq;
 
 namespace Onliner.Pages
@@ -34,7 +32,7 @@ namespace Onliner.Pages
         private MyWebElement FlatContainer => new MyWebElement(By.XPath(FLAT_CONTAINER));
         private MyWebElement QuantityOfFlatsContainer => new MyWebElement(By.XPath(QUANTITY_OF_FLATS_CONTAINER));
         private MyWebElement StreetNameOfTheFirstFlat => new MyWebElement(By.XPath(STREET_NAME_OF_THE_FIRST_FLAT));
-         
+
         public void ClickRentButton() => RentButton.Click();
 
         public void ChooseCity(string cityName) => new MyWebElement(By.XPath(string.Format(REGIONAL_CITIES_NAMES_IN_DROP_DOWN_MENU, cityName))).Click();
@@ -75,12 +73,12 @@ namespace Onliner.Pages
             FilterPriceToField.SendKeys(flatPriceTo + Keys.Enter);
         }
 
-        public void ClickCityAndAddressDropDownMenu() 
+        public void ClickCityAndAddressDropDownMenu()
         {
             CityAndAddressDropDownMenu.HoverOver();
             CityAndAddressDropDownMenu.Click();
         }
-        
+
         public bool IsFlatContainsOnlyNumberOfRooms()
         {
             bool isFlatContains = true;
@@ -88,7 +86,7 @@ namespace Onliner.Pages
             var NumberOfRoomContainer = FlatContainer.FindElements(By.XPath(".//span[@class='classified__caption']//span[1]"));
             foreach (var item in NumberOfRoomContainer)
             {
-                if(item.Text.Contains("Комната"))
+                if (item.Text.Contains("Комната"))
                 {
                     isFlatContains = false;
                     break;

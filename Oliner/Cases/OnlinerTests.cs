@@ -193,9 +193,12 @@ namespace Onliner.Cases
             Page.UserSupportPage.FillEmailFieldWithValidCredentials();
             Assert.IsTrue(Page.UserSupportPage.EmailFieldError.IsRemoved());
             Assert.IsTrue(Page.UserSupportPage.DropDownMenusOptionsCount());
-            Assert.IsTrue(Page.UserSupportPage.IsDiscriptionsPresent());
-            Assert.IsTrue(Page.UserSupportPage.IsCaptchaPresent());
+            Assert.IsTrue(Page.UserSupportPage.IsShortDiscriptionsPresent());
+            Assert.IsTrue(Page.UserSupportPage.IsDetaildDiscriptionPresent());
+            Assert.IsTrue(Page.UserSupportPage.IsCaptchaFieldPresent());
+            Assert.IsTrue(Page.UserSupportPage.IsCapthcaImgPresent());
             Assert.IsTrue(Page.UserSupportPage.IsAddButtonPresent());
+            Assert.IsTrue(Page.UserSupportPage.IsAddButtonEnable());
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 

@@ -12,7 +12,7 @@ namespace Onliner.Pages
         public MyWebElement SlightSmileSelected => new MyWebElement(By.XPath(SLIGHT_SMILE_SELECTED));
         private MyWebElement SlightSmile => new MyWebElement(By.XPath(SLIGHT_SMILE));
         private MyWebElement SlightSmileCount => new MyWebElement(By.XPath(SLIGHT_SMILE_COUNT));
-        
+
         public void ClickSlightSmile() => SlightSmile.Click();
 
         public int GetSlightSmilesValues() => int.Parse(SlightSmileCount.Text);

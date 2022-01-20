@@ -45,19 +45,16 @@ namespace Onliner.Pages
             return typeOfProblemOptionsCount.Count > 1 | whereOptionsCount.Count > 1;
         }
 
-        public bool IsDiscriptionsPresent()
-        {
-            return ShortDiscription.IsPresent() | DetailedDiscription.IsPresent();
-        }
+        public bool IsShortDiscriptionsPresent() => ShortDiscription.IsPresent();
 
-        public bool IsCaptchaPresent()
-        {
-            return CaptchaField.IsPresent() | CaptchaImg.IsPresent();
-        }
+        public bool IsDetaildDiscriptionPresent() => DetailedDiscription.IsPresent();
 
-        public bool IsAddButtonPresent()
-        {
-            return AddButton.IsPresent() | AddButton.Enabled;
-        }
+        public bool IsCaptchaFieldPresent() => CaptchaField.IsPresent();
+
+        public bool IsCapthcaImgPresent() => CaptchaImg.IsPresent();
+
+        public bool IsAddButtonPresent() => AddButton.IsPresent();
+
+        public bool IsAddButtonEnable() => AddButton.Enabled;
     }
 }

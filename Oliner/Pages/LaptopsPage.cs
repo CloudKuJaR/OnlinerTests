@@ -2,17 +2,16 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 
 namespace Onliner.Pages
 {
-    public class LaptopsPage: ProductsCatalogPage
+    public class LaptopsPage : ProductsCatalogPage
     {
         private const string MIN_FREQUENCY_DROP_DOWN_MENU = "(//span[text()='Частота матрицы']/parent::div/parent::div//select[@class='schema-filter-control__item'])[1]";
         private const string MAX_FREQUENCY_DROP_DOWN_MENU = "(//span[text()='Частота матрицы']/parent::div/parent::div//select[@class='schema-filter-control__item'])[2]";
         private const string LAPTOPS_PAGE_TITLE = "//h1[text()='Ноутбуки']";
         private const string ELEMENT_CONTAINER = "//div[@class='js-schema-results schema-grid__center-column']";
-        
+
         public MyWebElement LaptopsPageTitle => new MyWebElement(By.XPath(LAPTOPS_PAGE_TITLE));
         public MyWebElement ElementsContainer => new MyWebElement(By.XPath(ELEMENT_CONTAINER));
         public SelectElement MinFrequencyDropDownMenu => new SelectElement(Driver.driver.FindElement(By.XPath(MIN_FREQUENCY_DROP_DOWN_MENU)));
@@ -30,12 +29,12 @@ namespace Onliner.Pages
 
             wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']")).Count != 0);
 
-            
+
             var Products = ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']"));
 
             wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']")).Count != 0);
 
-            
+
             var SuperPriceBanner = ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']"));
 
             return Products.Count == SuperPriceBanner.Count;

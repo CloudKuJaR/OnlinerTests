@@ -1,7 +1,6 @@
 ﻿using Onliner.Utils;
 using Onliner.WebElementExtension;
 using OpenQA.Selenium;
-using System;
 
 namespace Onliner.Pages
 {
