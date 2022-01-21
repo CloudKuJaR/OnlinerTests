@@ -11,82 +11,34 @@ namespace Onliner.Pages
             return page;
         }
 
-        // <FIX> Use this style here:
-        // public static SomePage SomePage => GetPage<SomePage>();
+        public static CartPage CartPage => GetPage<CartPage>();
 
-        public static CartPage CartPage
-        {
-            get { return GetPage<CartPage>(); }
-        }
+        public static CatalogPage CatalogPage => GetPage<CatalogPage>();
 
-        public static CatalogPage CatalogPage
-        {
-            get { return GetPage<CatalogPage>(); }
-        }
+        public static LoginForm LoginPage => GetPage<LoginForm>();
 
-        public static LoginForm LoginPage
-        {
-            get { return GetPage<LoginForm>(); }
-        }
+        public static Menu Menu => GetPage<Menu>();
 
-        public static Menu Menu
-        {
-            get { return GetPage<Menu>(); }
-        }
+        public static ProductPage ProductPage => GetPage<ProductPage>();
 
-        public static ProductPage ProductPage
-        {
-            get { return GetPage<ProductPage>(); }
-        }
+        public static OrderPage OrderPage => GetPage<OrderPage>();
 
-        public static OrderPage OrderPage
-        {
-            get { return GetPage<OrderPage>(); }
-        }
+        public static ComparePage ComparePage => GetPage<ComparePage>();
 
-        public static ComparePage ComparePage
-        {
-            get { return GetPage<ComparePage>(); }
-        }
+        public static LaptopsPage LaptopsPage => GetPage<LaptopsPage>();
 
-        public static LaptopsPage LaptopsPage
-        {
-            get { return GetPage<LaptopsPage>(); }
-        }
+        public static ProductsCatalogPage ProductsCatalogPage => GetPage<ProductsCatalogPage>();
 
-        public static ProductsCatalogPage ProductsCatalogPage
-        {
-            get { return GetPage<ProductsCatalogPage>(); }
-        }
+        public static RegistrationPage RegistrationPage => GetPage<RegistrationPage>();
 
-        public static RegistrationPage RegistrationPage
-        {
-            get { return GetPage<RegistrationPage>(); }
-        }
+        public static HomePage HomePage => GetPage<HomePage>();
 
-        public static HomePage HomePage
-        {
-            get { return GetPage<HomePage>(); }
-        }
+        public static ArcticlePage ArcticlePage => GetPage<ArcticlePage>();
 
-        public static ArcticlePage ArcticlePage
-        {
-            get { return GetPage<ArcticlePage>(); }
-        }
+        public static UserSupportPage UserSupportPage => GetPage<UserSupportPage>();
 
-        public static UserSupportPage UserSupportPage
-        {
-            get { return GetPage<UserSupportPage>(); }
-        }
+        public static CurrencyConversionPage CurrencyConversionPage => GetPage<CurrencyConversionPage>();
 
-        public static CurrencyConversionPage CurrencyConversionPage
-        {
-            get { return GetPage<CurrencyConversionPage>(); }
-        }
-
-        public static HousesAndFlatsPage HousesAndFlatsPage
-        {
-            get { return GetPage<HousesAndFlatsPage>(); }
-        }
+        public static HousesAndFlatsPage HousesAndFlatsPage => GetPage<HousesAndFlatsPage>();
     }
 }

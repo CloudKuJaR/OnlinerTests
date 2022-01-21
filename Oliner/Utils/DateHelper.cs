@@ -4,8 +4,7 @@ namespace Onliner.Utils
 {
     public static class DateHelper
     {
-        // <FIX> Day. Not Date
-        public static int GetTodaysDate()
+        public static int GetTodaysDay()
         {
             int currentDate = DateTime.Today.Day;
 

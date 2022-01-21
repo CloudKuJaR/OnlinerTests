@@ -115,8 +115,7 @@ namespace Onliner.Pages
             return isFlatContains;
         }
 
-        // <FIX> Подфиксай имя метода, не оч красиво звучит. Например LessThanPrevious
-        public bool IsFlatContainsPriceLessThan()
+        public bool IsFlatContainsPriceLessThanPrevious()
         {
             bool isFlatContains = true;
             Driver.driver.GetWait().Until(drv => FlatContainer.FindElements(By.XPath(".//span[@class='classified__price-value classified__price-value_complementary']//span[1]")).Count != 0);

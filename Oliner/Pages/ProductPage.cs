@@ -35,7 +35,7 @@ namespace Onliner.Pages
 
         public void ClickCartButton()
         {
-            if(CartButton.IsPresent())
+            if (CartButton.IsPresent())
             {
                 CartButton.Click();
             }
@@ -49,7 +49,7 @@ namespace Onliner.Pages
         {
             SellerButton.HoverOver();
 
-            if(ConfirmCityButton.IsPresent())
+            if (ConfirmCityButton.IsPresent())
             {
                 ConfirmCityButton.Click();
             }

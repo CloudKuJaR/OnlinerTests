@@ -38,14 +38,13 @@ namespace Onliner.Pages
 
         public bool IsEmailFieldErrorRemoved() => EmailFieldError.IsRemoved();
 
-        // <FIX> Why hardcoded?
-        public void FillUserNameField() => UserNameField.SendKeys("Colombus");
+        public void FillUserNameField(string randomString) => UserNameField.SendKeys(randomString);
 
         public void ClearUserNameField() => UserNameField.Clear();
 
-        public void FillEmailFieldWithInvalidCredentials() => EmailField.SendKeys("asd" + Keys.Tab);
+        public void FillEmailFieldWithInvalidCredentials(string randomString) => EmailField.SendKeys(randomString + Keys.Tab);
 
-        public void FillEmailFieldWithValidCredentials() => EmailField.SendKeys("sus@amogus.com" + Keys.Tab);
+        public void FillEmailFieldWithValidCredentials(string randomString) => EmailField.SendKeys($"{randomString}@amogus.com" + Keys.Tab);
 
         public bool IsShortDiscriptionsPresent() => ShortDiscription.IsPresent();
 

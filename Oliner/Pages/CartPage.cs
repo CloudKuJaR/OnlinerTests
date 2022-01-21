@@ -19,10 +19,9 @@ namespace Onliner.Pages
         private MyWebElement DeleteButton => new MyWebElement(By.XPath(DELETE_BUTTON));
         private MyWebElement HomePageButton => new MyWebElement(By.XPath(HOME_PAGE_BUTTON));
 
-        // <FIX> OpenButton? нужно переименовать.
-        public void OpenOrderPageButton() => OrderButton.Click();
+        public void OpenOrderPage() => OrderButton.Click();
 
-        public void OpenHomePageButton() => HomePageButton.Click();
+        public void OpenHomePage() => HomePageButton.Click();
 
         public string GetProductPrice() => ProductPrice.Text;
 
@@ -40,8 +39,7 @@ namespace Onliner.Pages
             return QuantityOfProduct.Text;
         }
 
-        // <FIX> тут скорее уместно название DeleteProduct(). так в тесте будет красивее выглядеть само действие
-        public void ClickDeleteButton()
+        public void DeleteProduct()
         {
             DeleteButton.HoverOver();
             DeleteButton.Click();

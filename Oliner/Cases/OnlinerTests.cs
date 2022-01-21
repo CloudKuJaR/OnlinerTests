@@ -1,14 +1,14 @@
 ﻿using AventStack.ExtentReports;
 using NUnit.Framework;
 using Onliner.Pages;
+using Onliner.Utils;
 using Onliner.WebDriverExtension;
 using OpenQA.Selenium;
 using System;
 
 namespace Onliner.Cases
 {
-    // <FIX> Make class public
-    class OnlinerTests
+    public class OnlinerTests
     {
         private string maxFrequency = "165hz";
         private string minFrequency = "120hz";
@@ -68,7 +68,7 @@ namespace Onliner.Cases
             Assert.AreEqual(Page.CartPage.GetTvNameText(), productName);
             Assert.AreEqual(Page.CartPage.GetQuantityOfProductText(), quantityOfProducts);
             string productPrice = Page.CartPage.GetProductPrice();
-            Page.CartPage.OpenOrderPageButton();
+            Page.CartPage.OpenOrderPage();
             Assert.AreEqual(Page.OrderPage.GetPriceText(), productPrice);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
@@ -76,8 +76,8 @@ namespace Onliner.Cases
         [Test]
         public void SeacrhItemTest()
         {
-            Page.Menu.FillSerachBar();
-            Assert.IsTrue(Page.Menu.IsSearchItemContains(TestSettings.SearchItem));
+            Page.Menu.FillSerachBar(TestSettings.SearchItem);
+            Assert.IsTrue(Page.Menu.IsSearchContainsItem(TestSettings.SearchItem));
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -86,7 +86,7 @@ namespace Onliner.Cases
         {
             Login();
             Page.Menu.ClickUserMenuBatton();
-            Assert.AreEqual(Page.Menu.GetAccNameText(), TestSettings.UserId);
+            Assert.AreEqual(Page.Menu.GetAccountNameText(), TestSettings.UserId);
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -124,19 +124,19 @@ namespace Onliner.Cases
             //int firstValue = Page.LaptopsPage.GetQuantityOfProducts();
             Page.LaptopsPage.ClickManufactureContainerButton();
             Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
-            Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(nameOfManufacturerInFilterContainer));
+            Assert.IsTrue(Page.LaptopsPage.IsFilterContainerContaisFilter(nameOfManufacturerInFilterContainer));
             //int secondValue = Page.LaptopsPage.GetQuantityOfProducts();
             //Assert.IsTrue(Page.LaptopsPage.ComparingTheQuantityOfProducts(firstValue, secondValue));
             Page.LaptopsPage.ChangeMinFrequency(minFrequency);
             Page.LaptopsPage.ChangeMaxFrequency(maxFrequency);
-            Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(frequencyInFilterContainer));
+            Assert.IsTrue(Page.LaptopsPage.IsFilterContainerContaisFilter(frequencyInFilterContainer));
             Page.LaptopsPage.ClickSuperPriceCheckBox();
-            Assert.IsTrue(Page.LaptopsPage.IsFilterContanerContaisFilter(superPriceInFilterContainer));
+            Assert.IsTrue(Page.LaptopsPage.IsFilterContainerContaisFilter(superPriceInFilterContainer));
             Assert.IsTrue(Page.LaptopsPage.AreAllProductsContainsSuperPriceBanner());
             Page.LaptopsPage.ClickManufactureContainerButton();
             Page.LaptopsPage.ChooseManufacturer(nameOfManufacturer);
             Page.LaptopsPage.ClickManufactureContainerButton();
-            Assert.IsFalse(Page.LaptopsPage.IsFilterContanerContaisFilter(nameOfManufacturerInFilterContainer));
+            Assert.IsFalse(Page.LaptopsPage.IsFilterContainerContaisFilter(nameOfManufacturerInFilterContainer));
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
@@ -149,7 +149,7 @@ namespace Onliner.Cases
             Assert.IsTrue(Page.RegistrationPage.IsRegistrationFormTitlePresent());
             Page.RegistrationPage.FillEmailField();
             Assert.IsTrue(Page.RegistrationPage.IsEmailFieldHightLightedAndGreenPresent());
-            Page.RegistrationPage.ClickCheckBox();
+            Page.RegistrationPage.ClickAcceptPrivacyCheckBox();
             Page.RegistrationPage.ClickRegistrationButton();
             Assert.IsTrue(Page.RegistrationPage.IsPasswordFieldHightLightedAndRedPresent());
             Assert.IsTrue(Page.RegistrationPage.IsPasswordDescriptionErrorPresent());
@@ -161,9 +161,8 @@ namespace Onliner.Cases
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
-        // <FIX> Estimation in english is about rough calculation of the value, number, quantity, or extent of something. Not about giving like or dislike ;)
         [Test]
-        public void EstimationArticleTest()
+        public void RateArticleTest()
         {
             Page.HomePage.OpenCarsArticleTeaser();
             int firstValue = Page.ArcticlePage.GetSlightSmilesValues();
@@ -180,14 +179,15 @@ namespace Onliner.Cases
         [Test]
         public void UserSupportTest()
         {
-            Page.HomePage.OpenUserSupprotPage();
+            Page.HomePage.OpenUserSupportPage();
             Assert.IsTrue(Page.UserSupportPage.IsUserSupportPageTitlePresent());
-            Page.UserSupportPage.FillUserNameField();
+            string randomString = RandomHelper.GetRandomString();
+            Page.UserSupportPage.FillUserNameField(randomString);
             Page.UserSupportPage.ClearUserNameField();
             Assert.AreEqual(Page.UserSupportPage.GetUserNameFieldAttribute(), "Anonymous");
-            Page.UserSupportPage.FillEmailFieldWithInvalidCredentials();
+            Page.UserSupportPage.FillEmailFieldWithInvalidCredentials(randomString);
             Assert.IsTrue(Page.UserSupportPage.IsEmailFieldErrorPresent());
-            Page.UserSupportPage.FillEmailFieldWithValidCredentials();
+            Page.UserSupportPage.FillEmailFieldWithValidCredentials(randomString);
             Assert.IsTrue(Page.UserSupportPage.IsEmailFieldErrorRemoved());
             Assert.IsTrue(Page.UserSupportPage.DropDownMenusOptionsCount());
             Assert.IsTrue(Page.UserSupportPage.IsShortDiscriptionsPresent());
@@ -210,11 +210,12 @@ namespace Onliner.Cases
             Assert.IsTrue(Page.CurrencyConversionPage.IsCurrencyTypePresent(currencyTypeTextForEUR));
             Assert.IsTrue(Page.CurrencyConversionPage.IsCurrencyTypePresent(currencyTypeTextForRUB));
             string firstAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
-            Page.CurrencyConversionPage.FillAmountCurrencyFieldWithInvalidData();
+            string randomString = RandomHelper.GetRandomString();
+            Page.CurrencyConversionPage.FillAmountCurrencyField(randomString);
             string secondAmountCurrencyFieldValue = Page.CurrencyConversionPage.GetAmountCurrencyFieldValue();
             Assert.AreEqual(firstAmountCurrencyFieldValue, secondAmountCurrencyFieldValue);
-            int randomValue = Page.CurrencyConversionPage.GetRandomValue();
-            Page.CurrencyConversionPage.FillAmountCurrencyFieldWithValidData(randomValue.ToString());
+            int randomValue = RandomHelper.GetRandomValue();
+            Page.CurrencyConversionPage.FillAmountCurrencyField(randomValue.ToString(), true);
             Page.CurrencyConversionPage.ChooseTypeOfCurrency(eur);
             float bankSellingPrice = Page.CurrencyConversionPage.GetBankSellingPrice();
             Assert.AreEqual(Math.Round(randomValue * bankSellingPrice), Math.Round(Page.CurrencyConversionPage.ConvertConversionResultStringToFloat()));
@@ -244,7 +245,7 @@ namespace Onliner.Cases
             Assert.IsTrue(Page.HousesAndFlatsPage.IsFlatContainsOnlyTwoRoomsFlat());
             Page.HousesAndFlatsPage.FillFilterPriceToField(flatPriceTo);
             Page.HousesAndFlatsPage.WaitForQuantityOfFlatsChanged(thirdResultValue);
-            Assert.IsTrue(Page.HousesAndFlatsPage.IsFlatContainsPriceLessThan());
+            Assert.IsTrue(Page.HousesAndFlatsPage.IsFlatContainsPriceLessThanPrevious());
             Page.HousesAndFlatsPage.ClickSubWayDropDownMenu();
             Page.HousesAndFlatsPage.ChooseSubWayDropDownMenuOption(subwayDropDownMemuOption);
             Page.HousesAndFlatsPage.WaitForQuantityOfFlatsChanged(thirdResultValue);
@@ -268,8 +269,8 @@ namespace Onliner.Cases
             if (Page.Menu.IsCartBannerPresent() == true)
             {
                 Page.Menu.OpenCartPage();
-                Page.CartPage.ClickDeleteButton();
-                Page.CartPage.OpenHomePageButton();
+                Page.CartPage.DeleteProduct();
+                Page.CartPage.OpenHomePage();
                 Console.WriteLine("Очистка Корзины удалась");
             }
 

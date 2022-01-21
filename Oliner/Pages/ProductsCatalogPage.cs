@@ -1,7 +1,6 @@
-﻿using Onliner.WebElementExtension;
+﻿using Onliner.WebDriverExtension;
+using Onliner.WebElementExtension;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
 using System.Linq;
 
 namespace Onliner.Pages
@@ -20,14 +19,13 @@ namespace Onliner.Pages
         private MyWebElement ManufacturerContainerDropDownMenu => new MyWebElement(By.XPath(MANUFACTURER_CONTAINER_DROP_DOWN_MENU));
         private MyWebElement QuantityOfProducts => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCTS));
 
-        // <FIX> Переменные в C# называем с маленькой буквы
-        public void ChooseManufacturer(string ManufacturerName) => new MyWebElement(By.XPath(string.Format(MANUFACTURER_LOCATOR, ManufacturerName))).Click();
+        public void ChooseManufacturer(string manufacturerName) => new MyWebElement(By.XPath(string.Format(MANUFACTURER_LOCATOR, manufacturerName))).Click();
+
+        public bool ComparingTheQuantityOfProducts(int oldValue, int newValue) => newValue < oldValue;
 
         public void OpenProductPage(int productNumber)
         {
-            // <FIX> заменить на GetWait()
-            var wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
-            wait.Until(drv => ProductsContainer.FindElements(By.XPath(PRODUCT)).Count != 0);
+            Driver.driver.GetWait().Until(drv => ProductsContainer.FindElements(By.XPath(PRODUCT)).Count != 0);
             var Products = ProductsContainer.FindElements(By.XPath(PRODUCT));
             Products[productNumber].Click();
         }
@@ -45,12 +43,6 @@ namespace Onliner.Pages
             int quantityOfProductsValue = int.Parse(string.Join("", productsQuantityString.Where(c => char.IsDigit(c))));
 
             return quantityOfProductsValue;
-        }
-
-        // <FIX> сделай метод через =>
-        public bool ComparingTheQuantityOfProducts(int oldValue, int newValue)
-        {
-            return newValue < oldValue;
         }
     }
 }

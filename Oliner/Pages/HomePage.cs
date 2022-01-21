@@ -6,20 +6,18 @@ namespace Onliner.Pages
     public class HomePage
     {
         private const string CARS_ARTICLE_TEASER = "(//h2//a[text()='Лайфстайл']/parent::h2/parent::header/parent::div//li[@class='b-teasers-2__teaser'])[1]";
-        private const string USER_SUPPORT_PAGE = "//a[@href='https://support.onliner.by/']";
+        private const string USER_SUPPORT_PAGE_LINK = "//a[@href='https://support.onliner.by/']";
         private const string CURRENCY_CONVESRION_PAGE = "//a[@href='https://kurs.onliner.by/']";
         private const string HOUSES_AND_FLATS_PAGE = "//li[@class='b-main-navigation__item b-main-navigation__item_arrow']//a[@href='https://r.onliner.by/pk']";
 
         private MyWebElement CarsArticleTeaser => new MyWebElement(By.XPath(CARS_ARTICLE_TEASER));
-        // <FIX> Не совсем коректное имя. Этот локатор указывает не на Page, а на PageLink.
-        private MyWebElement UserSupportPage => new MyWebElement(By.XPath(USER_SUPPORT_PAGE));
+        private MyWebElement UserSupportPageLink => new MyWebElement(By.XPath(USER_SUPPORT_PAGE_LINK));
         private MyWebElement CurrencyConversionPage => new MyWebElement(By.XPath(CURRENCY_CONVESRION_PAGE));
         private MyWebElement HousesAndFlats => new MyWebElement(By.XPath(HOUSES_AND_FLATS_PAGE));
 
         public void OpenCarsArticleTeaser() => CarsArticleTeaser.Click();
 
-        // <FIX> опечатка)
-        public void OpenUserSupprotPage() => UserSupportPage.Click();
+        public void OpenUserSupportPage() => UserSupportPageLink.Click();
 
         public void OpenCurrencyConversionPage() => CurrencyConversionPage.Click();
 

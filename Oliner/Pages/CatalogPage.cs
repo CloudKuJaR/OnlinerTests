@@ -6,37 +6,36 @@ namespace Onliner.Pages
     public class CatalogPage
     {
 
-        private const string TV = "//a[@href='https://catalog.onliner.by/tv']";
-        private const string ELECTRONICS = "//li[@data-id='1']";
-        private const string TV_AND_VIDEO = "//a[@href='https://catalog.onliner.by/tv']/../../..";
+        private const string TV_PAGE = "//a[@href='https://catalog.onliner.by/tv']";
+        private const string ELECTRONICS_SECTION = "//li[@data-id='1']";
+        private const string TV_AND_VIDEO_SECTION = "//a[@href='https://catalog.onliner.by/tv']/../../..";
         private const string ELECTRONICS_TEXT = "//span[text()='Электроника']";
-        private const string COMPUTER_AND_WEB = "//li[@data-id='2']";
-        private const string LAPTOPS_AND_COMPUTERS = "//div[text()=' Ноутбуки, компьютеры, мониторы ']";
-        private const string LAPTOPS = "//a[@href='https://catalog.onliner.by/notebook']";
+        private const string COMPUTER_AND_WEB_SECTION = "//li[@data-id='2']";
+        private const string LAPTOPS_AND_COMPUTERS_SECTION = "//div[text()=' Ноутбуки, компьютеры, мониторы ']";
+        private const string LAPTOPS_PAGE = "//a[@href='https://catalog.onliner.by/notebook']";
 
         private MyWebElement ElectronicsText => new MyWebElement(By.XPath(ELECTRONICS_TEXT));
-        // <FIX> переименуй веб-элементы. По Tv, Electrionics и т.д. не ясно, что это конкретно на странице.
-        private MyWebElement Tv => new MyWebElement(By.XPath(TV));
-        private MyWebElement Electronics => new MyWebElement(By.XPath(ELECTRONICS));
-        private MyWebElement TvAndVideo => new MyWebElement(By.XPath(TV_AND_VIDEO));
-        private MyWebElement ComputerAndWeb => new MyWebElement(By.XPath(COMPUTER_AND_WEB));
-        private MyWebElement LaptopsAndComputers => new MyWebElement(By.XPath(LAPTOPS_AND_COMPUTERS));
-        private MyWebElement Laptops => new MyWebElement(By.XPath(LAPTOPS));
+        private MyWebElement TvPage => new MyWebElement(By.XPath(TV_PAGE));
+        private MyWebElement ElectronicsSection => new MyWebElement(By.XPath(ELECTRONICS_SECTION));
+        private MyWebElement TvAndVideoSection => new MyWebElement(By.XPath(TV_AND_VIDEO_SECTION));
+        private MyWebElement ComputerAndWebSection => new MyWebElement(By.XPath(COMPUTER_AND_WEB_SECTION));
+        private MyWebElement LaptopsAndComputersSection => new MyWebElement(By.XPath(LAPTOPS_AND_COMPUTERS_SECTION));
+        private MyWebElement LaptopsPage => new MyWebElement(By.XPath(LAPTOPS_PAGE));
 
         public string GetElectronicsText() => ElectronicsText.Text;
 
         public void NavigateToTvPage()
         {
-            Electronics.Click();
-            TvAndVideo.Click();
-            Tv.Click();
+            ElectronicsSection.Click();
+            TvAndVideoSection.Click();
+            TvPage.Click();
         }
 
         public void NavigateToLaptopPage()
         {
-            ComputerAndWeb.Click();
-            LaptopsAndComputers.Click();
-            Laptops.Click();
+            ComputerAndWebSection.Click();
+            LaptopsAndComputersSection.Click();
+            LaptopsPage.Click();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Onliner.WebElementExtension;
+﻿using Onliner.WebDriverExtension;
+using Onliner.WebElementExtension;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -27,23 +28,15 @@ namespace Onliner.Pages
 
         public bool AreAllProductsContainsSuperPriceBanner()
         {
-            var wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
-
-            wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']")).Count != 0);
-
-
+            Driver.driver.GetWait().Until(drv => ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']")).Count != 0);
             var Products = ElementsContainer.FindElements(By.XPath(".//span[@data-bind='html: product.extended_name || product.full_name']"));
-
-            wait.Until(drv => ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']")).Count != 0);
-
-
+            Driver.driver.GetWait().Until(drv => ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']")).Count != 0);
             var SuperPriceBanner = ElementsContainer.FindElements(By.XPath(".//div[@class='schema-product__hot']"));
 
             return Products.Count == SuperPriceBanner.Count;
         }
 
-        // <FIX> опечатка)
-        public bool IsFilterContanerContaisFilter(string filterText)
+        public bool IsFilterContainerContaisFilter(string filterText)
         {
             MyWebElement FilterElemet = new MyWebElement(By.XPath($"//span[@class='schema-tags__text'][text()='{filterText}']"));
             return FilterElemet.IsPresent(); ;
