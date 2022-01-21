@@ -60,6 +60,7 @@ namespace Onliner.Pages
             RepeatPasswordField.SendKeys(TestSettings.PasswordRegistration);
         }
 
+        // <FIX> What checkbox?)
         public void ClickCheckBox()
         {
             AcceptPrivacyCheckBox.WaitForElementIsDisplayed();

@@ -27,7 +27,7 @@ namespace Onliner.Pages
         private MyWebElement LogOutButton => new MyWebElement(By.XPath(LOGOUT_BUTTON));
         private MyWebElement CartButton => new MyWebElement(By.XPath(CART_BUTTON));
 
-
+        // <FIX> Сделай более универсальным. Если я захочу найти что-то другое?
         public void FillSerachBar() => SearchBar.SendKeys(TestSettings.SearchItem);
 
         public void OpenComparePage() => CompareButton.Click();
@@ -44,6 +44,7 @@ namespace Onliner.Pages
 
         public bool IsCartBannerPresent() => CartBanner.IsPresent();
 
+        // <FIX> Лучше не сокращать слова в названиях методов, это повышает читаемость
         public string GetAccNameText() => AccName.Text;
 
         public string GetCompareText() => CompareText.Text;
@@ -54,6 +55,7 @@ namespace Onliner.Pages
             CatalogButton.Click();
         }
 
+        // <FIX> ContainsItem sounds better
         public bool IsSearchItemContains(string searchItem)
         {
             bool isContains = true;

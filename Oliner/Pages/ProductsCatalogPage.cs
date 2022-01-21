@@ -20,10 +20,12 @@ namespace Onliner.Pages
         private MyWebElement ManufacturerContainerDropDownMenu => new MyWebElement(By.XPath(MANUFACTURER_CONTAINER_DROP_DOWN_MENU));
         private MyWebElement QuantityOfProducts => new MyWebElement(By.XPath(QUANTITY_OF_PRODUCTS));
 
+        // <FIX> Переменные в C# называем с маленькой буквы
         public void ChooseManufacturer(string ManufacturerName) => new MyWebElement(By.XPath(string.Format(MANUFACTURER_LOCATOR, ManufacturerName))).Click();
 
         public void OpenProductPage(int productNumber)
         {
+            // <FIX> заменить на GetWait()
             var wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(10));
             wait.Until(drv => ProductsContainer.FindElements(By.XPath(PRODUCT)).Count != 0);
             var Products = ProductsContainer.FindElements(By.XPath(PRODUCT));
@@ -45,6 +47,7 @@ namespace Onliner.Pages
             return quantityOfProductsValue;
         }
 
+        // <FIX> сделай метод через =>
         public bool ComparingTheQuantityOfProducts(int oldValue, int newValue)
         {
             return newValue < oldValue;

@@ -15,6 +15,7 @@ namespace Onliner.Pages
         private const string LAPTOPS = "//a[@href='https://catalog.onliner.by/notebook']";
 
         private MyWebElement ElectronicsText => new MyWebElement(By.XPath(ELECTRONICS_TEXT));
+        // <FIX> переименуй веб-элементы. По Tv, Electrionics и т.д. не ясно, что это конкретно на странице.
         private MyWebElement Tv => new MyWebElement(By.XPath(TV));
         private MyWebElement Electronics => new MyWebElement(By.XPath(ELECTRONICS));
         private MyWebElement TvAndVideo => new MyWebElement(By.XPath(TV_AND_VIDEO));

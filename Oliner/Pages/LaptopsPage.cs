@@ -42,6 +42,7 @@ namespace Onliner.Pages
             return Products.Count == SuperPriceBanner.Count;
         }
 
+        // <FIX> опечатка)
         public bool IsFilterContanerContaisFilter(string filterText)
         {
             MyWebElement FilterElemet = new MyWebElement(By.XPath($"//span[@class='schema-tags__text'][text()='{filterText}']"));

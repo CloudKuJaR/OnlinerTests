@@ -38,6 +38,7 @@ namespace Onliner.Pages
 
         public bool IsEmailFieldErrorRemoved() => EmailFieldError.IsRemoved();
 
+        // <FIX> Why hardcoded?
         public void FillUserNameField() => UserNameField.SendKeys("Colombus");
 
         public void ClearUserNameField() => UserNameField.Clear();

@@ -115,6 +115,7 @@ namespace Onliner.Pages
             return isFlatContains;
         }
 
+        // <FIX> Подфиксай имя метода, не оч красиво звучит. Например LessThanPrevious
         public bool IsFlatContainsPriceLessThan()
         {
             bool isFlatContains = true;

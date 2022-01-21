@@ -11,6 +11,9 @@ namespace Onliner.Pages
             return page;
         }
 
+        // <FIX> Use this style here:
+        // public static SomePage SomePage => GetPage<SomePage>();
+
         public static CartPage CartPage
         {
             get { return GetPage<CartPage>(); }

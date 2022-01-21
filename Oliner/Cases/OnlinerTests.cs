@@ -7,6 +7,7 @@ using System;
 
 namespace Onliner.Cases
 {
+    // <FIX> Make class public
     class OnlinerTests
     {
         private string maxFrequency = "165hz";
@@ -160,6 +161,7 @@ namespace Onliner.Cases
             Reporter.test.Log(Status.Pass, "Test Passed");
         }
 
+        // <FIX> Estimation in english is about rough calculation of the value, number, quantity, or extent of something. Not about giving like or dislike ;)
         [Test]
         public void EstimationArticleTest()
         {

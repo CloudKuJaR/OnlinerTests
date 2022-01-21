@@ -33,8 +33,8 @@ namespace Onliner.Pages
 
         public string GetProductName() => ProductName.Text;
 
-        public void ClickCartButton() 
-        { 
+        public void ClickCartButton()
+        {
             if(CartButton.IsPresent())
             {
                 CartButton.Click();
@@ -45,7 +45,7 @@ namespace Onliner.Pages
             }
         }
 
-        public void SelectCity() 
+        public void SelectCity()
         {
             SellerButton.HoverOver();
 

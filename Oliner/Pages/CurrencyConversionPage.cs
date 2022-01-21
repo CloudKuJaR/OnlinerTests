@@ -30,6 +30,7 @@ namespace Onliner.Pages
 
         public string GetAmountCurrencyFieldValue() => AmountCurrencyField.GetAttribute("value");
 
+        // <FIX> Этот метод не имеет отношения к PageObject
         public int GetRandomValue() => RandomHelper.GetRandomValue();
 
         public void ChooseTypeOfCurrency(string CurrencyType) => CurrencyDropDownMenu.SelectByValue(CurrencyType);
@@ -45,12 +46,13 @@ namespace Onliner.Pages
         public bool IsTheDateCorrect()
         {
             int currentDate = DateHelper.GetTodaysDate();
-            string currentMonth = DateHelper.GetCurrentMonth(); 
+            string currentMonth = DateHelper.GetCurrentMonth();
             string dateFromOnliner = DataContainer.Text;
 
             return dateFromOnliner.Contains(currentDate.ToString()) && dateFromOnliner.Contains(currentMonth);
         }
 
+        // <FIX> В данном случае нет смысла в создании 2-х методов. Достаточно одного (нижнего). Ты вызовешь его 2 раза (с некоректной строкой и с коректной)
         public void FillAmountCurrencyFieldWithInvalidData()
         {
             string randomString = RandomHelper.GetRandomString();

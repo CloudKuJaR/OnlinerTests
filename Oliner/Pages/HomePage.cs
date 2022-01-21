@@ -11,12 +11,14 @@ namespace Onliner.Pages
         private const string HOUSES_AND_FLATS_PAGE = "//li[@class='b-main-navigation__item b-main-navigation__item_arrow']//a[@href='https://r.onliner.by/pk']";
 
         private MyWebElement CarsArticleTeaser => new MyWebElement(By.XPath(CARS_ARTICLE_TEASER));
+        // <FIX> Не совсем коректное имя. Этот локатор указывает не на Page, а на PageLink.
         private MyWebElement UserSupportPage => new MyWebElement(By.XPath(USER_SUPPORT_PAGE));
         private MyWebElement CurrencyConversionPage => new MyWebElement(By.XPath(CURRENCY_CONVESRION_PAGE));
         private MyWebElement HousesAndFlats => new MyWebElement(By.XPath(HOUSES_AND_FLATS_PAGE));
 
         public void OpenCarsArticleTeaser() => CarsArticleTeaser.Click();
 
+        // <FIX> опечатка)
         public void OpenUserSupprotPage() => UserSupportPage.Click();
 
         public void OpenCurrencyConversionPage() => CurrencyConversionPage.Click();
